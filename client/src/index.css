@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white text-slate-800 antialiased;
+    font-feature-settings: 'kern' 1;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.animate-blink {
+  animation: blink 0.9s step-end infinite;
+}
+
+@keyframes blurFocus {
+  0%   { filter: blur(12px); opacity: 0; transform: scale(1.04); }
+  60%  { filter: blur(2px);  opacity: 0.9; }
+  100% { filter: blur(0);    opacity: 1;   transform: scale(1); }
+}
+.animate-blur-focus {
+  animation: blurFocus 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+@keyframes flip3d {
+  0%   { opacity: 0; transform: perspective(600px) rotateY(-90deg); }
+  60%  { transform: perspective(600px) rotateY(8deg); }
+  80%  { transform: perspective(600px) rotateY(-4deg); }
+  100% { opacity: 1; transform: perspective(600px) rotateY(0deg); }
+}
+.animate-flip-3d {
+  animation: flip3d 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+  transform-origin: center center;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease both;
+}
+.animate-fade-in-up-1 { animation: fadeInUp 0.6s ease 0.1s both; }
+.animate-fade-in-up-2 { animation: fadeInUp 0.6s ease 0.25s both; }
+.animate-fade-in-up-3 { animation: fadeInUp 0.6s ease 0.4s both; }
+.animate-fade-in-up-4 { animation: fadeInUp 0.6s ease 0.55s both; }
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    #0f172a 0%, #0f172a 30%,
+    #94a3b8 48%, #e2e8f0 50%, #94a3b8 52%,
+    #0f172a 70%, #0f172a 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/[0.06];
+  }
+
+  .btn-primary {
+    @apply bg-brand-500 text-white rounded-xl px-4 py-2 font-semibold
+           hover:bg-brand-600 active:bg-brand-700
+           transition-colors duration-150
+           focus:outline-none focus:ring-2 focus:ring-brand-400 focus:ring-offset-2;
+  }
+
+  .skeleton {
+    @apply bg-slate-100 animate-pulse rounded-lg;
+  }
+
+  .tag {
+    @apply inline-flex items-center text-xs font-medium rounded-full px-2.5 py-0.5;
+  }
+}

@@ -1,0 +1,1795 @@
+[
+  {
+    "id": "cankyobo-1",
+    "name": "Cankyobo library",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://cankyobo.dkyobobook.co.kr",
+    "link": "http://cankyobo.dkyobobook.co.kr"
+  },
+  {
+    "id": "gaplib-1",
+    "name": "가평군립도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gaplib.or.kr:9090",
+    "link": "http://ebook.gaplib.or.kr:9090"
+  },
+  {
+    "id": "gangnam-1",
+    "name": "강남구청",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gangnam.go.kr",
+    "link": "http://ebook.gangnam.go.kr"
+  },
+  {
+    "id": "gdlib-1",
+    "name": "강동구립도서관(구독)",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://gdlib.dkyobobook.co.kr",
+    "link": "http://gdlib.dkyobobook.co.kr"
+  },
+  {
+    "id": "gblib-1",
+    "name": "강북문화정보도서관",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gblib.or.kr",
+    "link": "http://ebook.gblib.or.kr"
+  },
+  {
+    "id": "gwe-1",
+    "name": "강원도교육청",
+    "region": "강원",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gwe.go.kr",
+    "link": "http://ebook.gwe.go.kr"
+  },
+  {
+    "id": "gjlib-1",
+    "name": "강진군립도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://www.gjlib.go.kr:88",
+    "link": "http://www.gjlib.go.kr:88"
+  },
+  {
+    "id": "geoje-1",
+    "name": "거제시청 전자책도서관",
+    "region": "경남",
+    "platform": "kyobo",
+    "baseUrl": "http://geoje.dkyobobook.co.kr",
+    "link": "http://geoje.dkyobobook.co.kr"
+  },
+  {
+    "id": "gglec-1",
+    "name": "경기DLS",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://cyber.gglec.go.kr",
+    "link": "http://cyber.gglec.go.kr"
+  },
+  {
+    "id": "goe-1",
+    "name": "경기과천교육도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://elib.goe.go.kr:8104",
+    "link": "http://elib.goe.go.kr:8104"
+  },
+  {
+    "id": "goe-1",
+    "name": "경기도교육청전자도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://elib.goe.go.kr:8101",
+    "link": "http://elib.goe.go.kr:8101"
+  },
+  {
+    "id": "goe-1",
+    "name": "경기도립중앙도서관 평택분관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://elib.goe.go.kr:8103",
+    "link": "http://elib.goe.go.kr:8103"
+  },
+  {
+    "id": "goe-1",
+    "name": "경기도립포천분관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://elib.goe.go.kr:8109",
+    "link": "http://elib.goe.go.kr:8109"
+  },
+  {
+    "id": "library-1",
+    "name": "경기도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebookdrm.library.kr:8091",
+    "link": "http://ebookdrm.library.kr:8091"
+  },
+  {
+    "id": "goe-1",
+    "name": "경기성남교육도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://elib.goe.go.kr:8105",
+    "link": "http://elib.goe.go.kr:8105"
+  },
+  {
+    "id": "goe-1",
+    "name": "경기의정부교육도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://elib.goe.go.kr:8107",
+    "link": "http://elib.goe.go.kr:8107"
+  },
+  {
+    "id": "goe-1",
+    "name": "경기중앙교육도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://elib.goe.go.kr:8102",
+    "link": "http://elib.goe.go.kr:8102"
+  },
+  {
+    "id": "goe-1",
+    "name": "경기평생학습관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://elib.goe.go.kr:8108",
+    "link": "http://elib.goe.go.kr:8108"
+  },
+  {
+    "id": "goe-1",
+    "name": "경기화성교육도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://elib.goe.go.kr:8106",
+    "link": "http://elib.goe.go.kr:8106"
+  },
+  {
+    "id": "gb-1",
+    "name": "경북도서관",
+    "region": "경북",
+    "platform": "kyobo",
+    "baseUrl": "http://www.gb.go.kr:8085",
+    "link": "http://www.gb.go.kr:8085"
+  },
+  {
+    "id": "gbgs-1",
+    "name": "경산시립도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://elib.gbgs.go.kr",
+    "link": "http://elib.gbgs.go.kr"
+  },
+  {
+    "id": "gne-1",
+    "name": "경상남도교육청 통합전자도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gne.go.kr:9029",
+    "link": "http://ebook.gne.go.kr:9029"
+  },
+  {
+    "id": "gyeongnam-1",
+    "name": "경상남도대표도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "https://elib.gyeongnam.go.kr:8114",
+    "link": "https://elib.gyeongnam.go.kr:8114"
+  },
+  {
+    "id": "gyeryong-1",
+    "name": "계룡도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://e-lib.gyeryong.go.kr:8003",
+    "link": "http://e-lib.gyeryong.go.kr:8003"
+  },
+  {
+    "id": "ice-1",
+    "name": "계양도서관",
+    "region": "인천",
+    "platform": "kyobo",
+    "baseUrl": "http://e-lib.ice.go.kr:8092",
+    "link": "http://e-lib.ice.go.kr:8092"
+  },
+  {
+    "id": "gne-1",
+    "name": "고성도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gne.go.kr:9021",
+    "link": "http://ebook.gne.go.kr:9021"
+  },
+  {
+    "id": "goyanglib-1",
+    "name": "고양시 도서관센터",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.goyanglib.or.kr",
+    "link": "http://ebook.goyanglib.or.kr"
+  },
+  {
+    "id": "jbe-1",
+    "name": "고창공공도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jbe.go.kr:10094",
+    "link": "http://ebook.jbe.go.kr:10094"
+  },
+  {
+    "id": "gochang-1",
+    "name": "고창군 도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gochang.go.kr:88",
+    "link": "http://ebook.gochang.go.kr:88"
+  },
+  {
+    "id": "gochanglib-1",
+    "name": "고창군도서관(구독)",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://gochanglib.dkyobobook.co.kr",
+    "link": "http://gochanglib.dkyobobook.co.kr"
+  },
+  {
+    "id": "ghlib-1",
+    "name": "고흥군립도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://www.ghlib.go.kr:88",
+    "link": "http://www.ghlib.go.kr:88"
+  },
+  {
+    "id": "jne-1",
+    "name": "곡성교육문화회관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jne.go.kr:8301",
+    "link": "http://ebook.jne.go.kr:8301"
+  },
+  {
+    "id": "gongjulib-1",
+    "name": "공주시시립도서관",
+    "region": "충남",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gongjulib.go.kr",
+    "link": "http://ebook.gongjulib.go.kr"
+  },
+  {
+    "id": "gclib-1",
+    "name": "과천시정보과학도서관(소장)",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gclib.go.kr",
+    "link": "http://ebook.gclib.go.kr"
+  },
+  {
+    "id": "210-1",
+    "name": "광명시중앙도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://210.117.242.66:8091",
+    "link": "http://210.117.242.66:8091"
+  },
+  {
+    "id": "ebk-1",
+    "name": "광산구통합도서관",
+    "region": "광주",
+    "platform": "kyobo",
+    "baseUrl": "http://ebk.gwangsan.go.kr",
+    "link": "http://ebk.gwangsan.go.kr"
+  },
+  {
+    "id": "jne-1",
+    "name": "광양공공도서관",
+    "region": "전남",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jne.go.kr:8302",
+    "link": "http://ebook.jne.go.kr:8302"
+  },
+  {
+    "id": "gwangyang-1",
+    "name": "광양시립도서관",
+    "region": "전남",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gwangyang.go.kr:88",
+    "link": "http://ebook.gwangyang.go.kr:88"
+  },
+  {
+    "id": "jne-1",
+    "name": "광양평생교육관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jne.go.kr:8303",
+    "link": "http://ebook.jne.go.kr:8303"
+  },
+  {
+    "id": "seogulib-1",
+    "name": "광주광역시 서구 통합전자도서관(구독)",
+    "region": "광주",
+    "platform": "kyobo",
+    "baseUrl": "http://seogulib.dkyobobook.co.kr/",
+    "link": "http://seogulib.dkyobobook.co.kr/"
+  },
+  {
+    "id": "libebook-1",
+    "name": "광주광역시교육청 통합도서관",
+    "region": "광주",
+    "platform": "kyobo",
+    "baseUrl": "http://libebook.gen.go.kr:88",
+    "link": "http://libebook.gen.go.kr:88"
+  },
+  {
+    "id": "gwangju-1",
+    "name": "광주광역시립도서관",
+    "region": "광주",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gwangju.go.kr:88",
+    "link": "http://ebook.gwangju.go.kr:88"
+  },
+  {
+    "id": "bukgu-1",
+    "name": "광주광역시북구통합도서관",
+    "region": "광주",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.bukgu.gwangju.kr",
+    "link": "http://ebook.bukgu.gwangju.kr"
+  },
+  {
+    "id": "namgu-1",
+    "name": "광주남구도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.namgu.gwangju.kr:8000",
+    "link": "http://ebook.namgu.gwangju.kr:8000"
+  },
+  {
+    "id": "gjcity-1",
+    "name": "광주시립도서관(경기)",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://lib.gjcity.go.kr:8081",
+    "link": "http://lib.gjcity.go.kr:8081"
+  },
+  {
+    "id": "gwangjinlib-1",
+    "name": "광진구립도서관",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gwangjinlib.seoul.kr:8090",
+    "link": "http://ebook.gwangjinlib.seoul.kr:8090"
+  },
+  {
+    "id": "guro-1",
+    "name": "구로구청",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.guro.go.kr",
+    "link": "http://ebook.guro.go.kr"
+  },
+  {
+    "id": "gurilib-1",
+    "name": "구리시립도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gurilib.go.kr:8091",
+    "link": "http://ebook.gurilib.go.kr:8091"
+  },
+  {
+    "id": "gumilib-1",
+    "name": "구미시립도서관",
+    "region": "경북",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gumilib.or.kr",
+    "link": "http://ebook.gumilib.or.kr"
+  },
+  {
+    "id": "nls-1",
+    "name": "국립세종도서관",
+    "region": "세종",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.nls.go.kr",
+    "link": "http://ebook.nls.go.kr"
+  },
+  {
+    "id": "nlcy-1",
+    "name": "국립어린이청소년도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.nlcy.go.kr",
+    "link": "http://ebook.nlcy.go.kr"
+  },
+  {
+    "id": "nanet-1",
+    "name": "국회도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.nanet.go.kr:8088",
+    "link": "http://ebook.nanet.go.kr:8088"
+  },
+  {
+    "id": "jbe-1",
+    "name": "군산교육문화회관",
+    "region": "전북",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jbe.go.kr:10083",
+    "link": "http://ebook.jbe.go.kr:10083"
+  },
+  {
+    "id": "jbe-1",
+    "name": "군산교육문화회관 대야 분관",
+    "region": "전북",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jbe.go.kr:10084",
+    "link": "http://ebook.jbe.go.kr:10084"
+  },
+  {
+    "id": "gunsan-1",
+    "name": "군산시립도서관",
+    "region": "전북",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gunsan.go.kr:8001",
+    "link": "http://ebook.gunsan.go.kr:8001"
+  },
+  {
+    "id": "gunpolib-1",
+    "name": "군포시중앙도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gunpolib.go.kr:8091",
+    "link": "http://ebook.gunpolib.go.kr:8091"
+  },
+  {
+    "id": "geumjeong-1",
+    "name": "금정도서관",
+    "region": "부산",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.geumjeong.go.kr:88",
+    "link": "http://ebook.geumjeong.go.kr:88"
+  },
+  {
+    "id": "jbe-1",
+    "name": "김제교육문화회관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jbe.go.kr:10088",
+    "link": "http://ebook.jbe.go.kr:10088"
+  },
+  {
+    "id": "jbe-1",
+    "name": "김제교육문화회관 김제분관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jbe.go.kr:10089",
+    "link": "http://ebook.jbe.go.kr:10089"
+  },
+  {
+    "id": "ebook-gjl-1",
+    "name": "김제시립도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook-gjl.gimje.go.kr:88",
+    "link": "http://ebook-gjl.gimje.go.kr:88"
+  },
+  {
+    "id": "gimpo-1",
+    "name": "김포시립도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gimpo.go.kr:8091",
+    "link": "http://ebook.gimpo.go.kr:8091"
+  },
+  {
+    "id": "gne-1",
+    "name": "김해도서관",
+    "region": "경남",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gne.go.kr:9022",
+    "link": "http://ebook.gne.go.kr:9022"
+  },
+  {
+    "id": "gyeongnam-1",
+    "name": "김해시청",
+    "region": "경남",
+    "platform": "kyobo",
+    "baseUrl": "https://elib.gyeongnam.go.kr:8115",
+    "link": "https://elib.gyeongnam.go.kr:8115"
+  },
+  {
+    "id": "jne-1",
+    "name": "나주공공도서관",
+    "region": "전남",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jne.go.kr:8310",
+    "link": "http://ebook.jne.go.kr:8310"
+  },
+  {
+    "id": "ebooks-1",
+    "name": "나주시립도서관",
+    "region": "전남",
+    "platform": "kyobo",
+    "baseUrl": "http://ebooks.ss21.kr:8005",
+    "link": "http://ebooks.ss21.kr:8005"
+  },
+  {
+    "id": "nyj-1",
+    "name": "남양주도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.nyj.go.kr",
+    "link": "http://ebook.nyj.go.kr"
+  },
+  {
+    "id": "jbe-1",
+    "name": "남원교육문화원",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jbe.go.kr:10092",
+    "link": "http://ebook.jbe.go.kr:10092"
+  },
+  {
+    "id": "gyeongnam-1",
+    "name": "남해화전도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "https://elib.gyeongnam.go.kr:8126",
+    "link": "https://elib.gyeongnam.go.kr:8126"
+  },
+  {
+    "id": "eb-1",
+    "name": "노원구 구립도서관",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://eb.nowonlib.kr",
+    "link": "http://eb.nowonlib.kr"
+  },
+  {
+    "id": "nohyeonglib-1",
+    "name": "노형꿈틀작은도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://nohyeonglib.dkyobobook.co.kr",
+    "link": "http://nohyeonglib.dkyobobook.co.kr"
+  },
+  {
+    "id": "danyang-1",
+    "name": "단양다누리도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.danyang.go.kr:8091",
+    "link": "http://ebook.danyang.go.kr:8091"
+  },
+  {
+    "id": "dangjin-1",
+    "name": "당진시립도서관",
+    "region": "충남",
+    "platform": "kyobo",
+    "baseUrl": "http://lib.dangjin.go.kr:8080",
+    "link": "http://lib.dangjin.go.kr:8080"
+  },
+  {
+    "id": "dge-1",
+    "name": "대구광역시교육청 도서관",
+    "region": "대구",
+    "platform": "kyobo",
+    "baseUrl": "http://dge.dkyobobook.co.kr",
+    "link": "http://dge.dkyobobook.co.kr"
+  },
+  {
+    "id": "dgelib-r-1",
+    "name": "대구학생전자도서관(대여)",
+    "region": "대구",
+    "platform": "kyobo",
+    "baseUrl": "http://dgelib-r.dkyobobook.co.kr",
+    "link": "http://dgelib-r.dkyobobook.co.kr"
+  },
+  {
+    "id": "ebooklibkb-1",
+    "name": "대덕구 전자도서관(송촌,안산,신탄진)",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebooklibkb.daedeok.go.kr",
+    "link": "http://ebooklibkb.daedeok.go.kr"
+  },
+  {
+    "id": "dsecc-1",
+    "name": "대전학생교육문화원",
+    "region": "대전",
+    "platform": "kyobo",
+    "baseUrl": "http://e.dsecc.djsch.kr",
+    "link": "http://e.dsecc.djsch.kr"
+  },
+  {
+    "id": "dobong-1",
+    "name": "도봉문화정보도서관",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://elib.dobong.kr",
+    "link": "http://elib.dobong.kr"
+  },
+  {
+    "id": "l4d-1",
+    "name": "동대문구립도서관",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://e-book.l4d.or.kr",
+    "link": "http://e-book.l4d.or.kr"
+  },
+  {
+    "id": "dongjak-1",
+    "name": "동작구통합도서관",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.dongjak.go.kr",
+    "link": "http://ebook.dongjak.go.kr"
+  },
+  {
+    "id": "donghaelib-1",
+    "name": "동해시립도서관(구독)",
+    "region": "강원",
+    "platform": "kyobo",
+    "baseUrl": "http://donghaelib.dkyobobook.co.kr",
+    "link": "http://donghaelib.dkyobobook.co.kr"
+  },
+  {
+    "id": "rainbowlib-1",
+    "name": "레인보우영동도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.rainbowlib.go.kr:8091",
+    "link": "http://ebook.rainbowlib.go.kr:8091"
+  },
+  {
+    "id": "gne-1",
+    "name": "마산도서관(교육청산하)",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gne.go.kr:9023",
+    "link": "http://ebook.gne.go.kr:9023"
+  },
+  {
+    "id": "mapo-1",
+    "name": "마포구청",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.mapo.go.kr:8088",
+    "link": "http://ebook.mapo.go.kr:8088"
+  },
+  {
+    "id": "jbe-1",
+    "name": "마한교육문화회관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jbe.go.kr:10096",
+    "link": "http://ebook.jbe.go.kr:10096"
+  },
+  {
+    "id": "jbe-1",
+    "name": "마한교육문화회관(함열분관)",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jbe.go.kr:10097",
+    "link": "http://ebook.jbe.go.kr:10097"
+  },
+  {
+    "id": "bsbukgu-1",
+    "name": "만덕도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.bsbukgu.go.kr:8091",
+    "link": "http://ebook.bsbukgu.go.kr:8091"
+  },
+  {
+    "id": "jne-1",
+    "name": "목포공공도서관",
+    "region": "전남",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jne.go.kr:8309",
+    "link": "http://ebook.jne.go.kr:8309"
+  },
+  {
+    "id": "mokpolib-1",
+    "name": "목포시통합도서관",
+    "region": "전남",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.mokpolib.or.kr:88",
+    "link": "http://ebook.mokpolib.or.kr:88"
+  },
+  {
+    "id": "jbe-1",
+    "name": "무주공공도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jbe.go.kr:10099",
+    "link": "http://ebook.jbe.go.kr:10099"
+  },
+  {
+    "id": "munsu-1",
+    "name": "문수 작은도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://munsu.mhebook.co.kr",
+    "link": "http://munsu.mhebook.co.kr"
+  },
+  {
+    "id": "gyeongnam-1",
+    "name": "밀양시립도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "https://elib.gyeongnam.go.kr:8124",
+    "link": "https://elib.gyeongnam.go.kr:8124"
+  },
+  {
+    "id": "presidentparkchunghee-1",
+    "name": "박정희대통령기념도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://presidentparkchunghee.dkyobobook.co.kr",
+    "link": "http://presidentparkchunghee.dkyobobook.co.kr"
+  },
+  {
+    "id": "contents-1",
+    "name": "부산광역시립시민도서관",
+    "region": "부산",
+    "platform": "kyobo",
+    "baseUrl": "http://contents.siminlib.go.kr:8094",
+    "link": "http://contents.siminlib.go.kr:8094"
+  },
+  {
+    "id": "bsnamgu-1",
+    "name": "부산남구도서관",
+    "region": "부산",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.bsnamgu.go.kr:88",
+    "link": "http://ebook.bsnamgu.go.kr:88"
+  },
+  {
+    "id": "gne-1",
+    "name": "부산남지도서관",
+    "region": "부산",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gne.go.kr:9028",
+    "link": "http://ebook.gne.go.kr:9028"
+  },
+  {
+    "id": "busan-1",
+    "name": "부산대표도서관",
+    "region": "부산",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.busan.go.kr:8093",
+    "link": "http://ebook.busan.go.kr:8093"
+  },
+  {
+    "id": "jbe-1",
+    "name": "부안교육문화회관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jbe.go.kr:10082",
+    "link": "http://ebook.jbe.go.kr:10082"
+  },
+  {
+    "id": "ss21-1",
+    "name": "부안군립도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://www.ss21.kr:8002",
+    "link": "http://www.ss21.kr:8002"
+  },
+  {
+    "id": "bcl-1",
+    "name": "부천시립도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.bcl.go.kr:8080",
+    "link": "http://ebook.bcl.go.kr:8080"
+  },
+  {
+    "id": "bppl-1",
+    "name": "부평구립도서관",
+    "region": "인천",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.bppl.or.kr:8090",
+    "link": "http://ebook.bppl.or.kr:8090"
+  },
+  {
+    "id": "ebooks-1",
+    "name": "상록도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebooks.seogu.gwangju.kr:88",
+    "link": "http://ebooks.seogu.gwangju.kr:88"
+  },
+  {
+    "id": "sdm-1",
+    "name": "서대문구립도서관(sam)",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.sdm.or.kr:81",
+    "link": "http://ebook.sdm.or.kr:81"
+  },
+  {
+    "id": "eblib-1",
+    "name": "서산시립도서관",
+    "region": "충남",
+    "platform": "kyobo",
+    "baseUrl": "http://eblib.seosan.go.kr",
+    "link": "http://eblib.seosan.go.kr"
+  },
+  {
+    "id": "ebclib-1",
+    "name": "서산어린이도서관",
+    "region": "충남",
+    "platform": "kyobo",
+    "baseUrl": "http://ebclib.seosan.go.kr",
+    "link": "http://ebclib.seosan.go.kr"
+  },
+  {
+    "id": "esac-ebook-1",
+    "name": "서울문화재단 예술교육정보자료관",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://esac-ebook.sfac.or.kr",
+    "link": "http://esac-ebook.sfac.or.kr"
+  },
+  {
+    "id": "sen-1",
+    "name": "서울시교육청",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://e-lib.sen.go.kr:8090",
+    "link": "http://e-lib.sen.go.kr:8090"
+  },
+  {
+    "id": "e-childlib-1",
+    "name": "서울시립어린이도서관",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://e-childlib.sen.go.kr:8080",
+    "link": "http://e-childlib.sen.go.kr:8080"
+  },
+  {
+    "id": "seocholib-1",
+    "name": "서초구립반포도서관",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.seocholib.or.kr",
+    "link": "http://ebook.seocholib.or.kr"
+  },
+  {
+    "id": "issl-1",
+    "name": "석남어린이도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.issl.go.kr:8080",
+    "link": "http://ebook.issl.go.kr:8080"
+  },
+  {
+    "id": "suwonlib-1",
+    "name": "선경도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.suwonlib.go.kr",
+    "link": "http://ebook.suwonlib.go.kr"
+  },
+  {
+    "id": "vodbook-1",
+    "name": "성남시중앙도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://vodbook.snlib.go.kr",
+    "link": "http://vodbook.snlib.go.kr"
+  },
+  {
+    "id": "sdlib-1",
+    "name": "성동구립도서관",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.sdlib.or.kr:8091",
+    "link": "http://ebook.sdlib.or.kr:8091"
+  },
+  {
+    "id": "sedl-1",
+    "name": "성동구립영어도서관",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://sedl.sdlib.or.kr:8091",
+    "link": "http://sedl.sdlib.or.kr:8091"
+  },
+  {
+    "id": "sblib-1",
+    "name": "성북도서관",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://elibrary.sblib.seoul.kr",
+    "link": "http://elibrary.sblib.seoul.kr"
+  },
+  {
+    "id": "sje-1",
+    "name": "세종시교육청",
+    "region": "세종",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.sje.go.kr:8087",
+    "link": "http://ebook.sje.go.kr:8087"
+  },
+  {
+    "id": "sejonglib-1",
+    "name": "세종시립도서관(구독)",
+    "region": "세종",
+    "platform": "kyobo",
+    "baseUrl": "http://sejonglib.dkyobobook.co.kr",
+    "link": "http://sejonglib.dkyobobook.co.kr"
+  },
+  {
+    "id": "sje-1",
+    "name": "세종특별자치시교육청평생교육학습관",
+    "region": "세종",
+    "platform": "kyobo",
+    "baseUrl": "http://sje.dkyobobook.co.kr",
+    "link": "http://sje.dkyobobook.co.kr"
+  },
+  {
+    "id": "splib-1",
+    "name": "송파구 통합도서관",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.splib.or.kr:8090",
+    "link": "http://ebook.splib.or.kr:8090"
+  },
+  {
+    "id": "ebook-bookmuseum-1",
+    "name": "송파책박물관",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook-bookmuseum.mlss.co.kr",
+    "link": "http://ebook-bookmuseum.mlss.co.kr"
+  },
+  {
+    "id": "suyeong-1",
+    "name": "수영도서관",
+    "region": "부산",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.suyeong.go.kr:88",
+    "link": "http://ebook.suyeong.go.kr:88"
+  },
+  {
+    "id": "jbe-1",
+    "name": "순창공공도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jbe.go.kr:10085",
+    "link": "http://ebook.jbe.go.kr:10085"
+  },
+  {
+    "id": "libebook-1",
+    "name": "순천시립도서관",
+    "region": "전남",
+    "platform": "kyobo",
+    "baseUrl": "http://libebook.suncheon.go.kr:88",
+    "link": "http://libebook.suncheon.go.kr:88"
+  },
+  {
+    "id": "suncheonlib-1",
+    "name": "순천시립도서관(구독)",
+    "region": "전남",
+    "platform": "kyobo",
+    "baseUrl": "http://suncheonlib.dkyobobook.co.kr",
+    "link": "http://suncheonlib.dkyobobook.co.kr"
+  },
+  {
+    "id": "shcitylib-1",
+    "name": "시흥시중앙도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.shcitylib.or.kr",
+    "link": "http://ebook.shcitylib.or.kr"
+  },
+  {
+    "id": "asan-1",
+    "name": "아산시립도서관",
+    "region": "충남",
+    "platform": "kyobo",
+    "baseUrl": "http://elib.asan.go.kr:8090",
+    "link": "http://elib.asan.go.kr:8090"
+  },
+  {
+    "id": "andong-1",
+    "name": "안동시립도서관",
+    "region": "경북",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.andong.go.kr",
+    "link": "http://ebook.andong.go.kr"
+  },
+  {
+    "id": "ansan-1",
+    "name": "안산시도서관(소장형)",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.ansan.go.kr:8099",
+    "link": "http://ebook.ansan.go.kr:8099"
+  },
+  {
+    "id": "apl-1",
+    "name": "안성시립도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.apl.go.kr:8090",
+    "link": "http://ebook.apl.go.kr:8090"
+  },
+  {
+    "id": "anyang-1",
+    "name": "안양시립석수도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://elib.anyang.go.kr:8091",
+    "link": "http://elib.anyang.go.kr:8091"
+  },
+  {
+    "id": "gne-1",
+    "name": "양산도서관",
+    "region": "경남",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gne.go.kr:9024",
+    "link": "http://ebook.gne.go.kr:9024"
+  },
+  {
+    "id": "gyeongnam-1",
+    "name": "양산도서관",
+    "region": "경남",
+    "platform": "kyobo",
+    "baseUrl": "https://elib.gyeongnam.go.kr:8116",
+    "link": "https://elib.gyeongnam.go.kr:8116"
+  },
+  {
+    "id": "yangju-1",
+    "name": "양주시립도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.yangju.go.kr:8089",
+    "link": "http://ebook.yangju.go.kr:8089"
+  },
+  {
+    "id": "yangcheon-1",
+    "name": "양천구청",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.yangcheon.or.kr",
+    "link": "http://ebook.yangcheon.or.kr"
+  },
+  {
+    "id": "yclib-1",
+    "name": "양천도서관",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.yclib.or.kr:8083",
+    "link": "http://ebook.yclib.or.kr:8083"
+  },
+  {
+    "id": "yplib-1",
+    "name": "양평군도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.yplib.go.kr",
+    "link": "http://ebook.yplib.go.kr"
+  },
+  {
+    "id": "yslibeb-1",
+    "name": "여수시립도서관",
+    "region": "전남",
+    "platform": "kyobo",
+    "baseUrl": "http://yslibeb.yeosu.go.kr:88",
+    "link": "http://yslibeb.yeosu.go.kr:88"
+  },
+  {
+    "id": "ydplib-1",
+    "name": "여의샛강마을도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.ydplib.or.kr:9940",
+    "link": "http://ebook.ydplib.or.kr:9940"
+  },
+  {
+    "id": "yjlib-1",
+    "name": "여주시평생학습센터",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.yjlib.go.kr",
+    "link": "http://ebook.yjlib.go.kr"
+  },
+  {
+    "id": "yspubliclib-1",
+    "name": "연수구립도서관",
+    "region": "인천",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.yspubliclib.go.kr:8092",
+    "link": "http://ebook.yspubliclib.go.kr:8092"
+  },
+  {
+    "id": "ice-1",
+    "name": "연수도서관",
+    "region": "인천",
+    "platform": "kyobo",
+    "baseUrl": "http://e-lib.ice.go.kr:8096",
+    "link": "http://e-lib.ice.go.kr:8096"
+  },
+  {
+    "id": "nm-1",
+    "name": "연천군도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://nm.yeoncheon.go.kr:8091",
+    "link": "http://nm.yeoncheon.go.kr:8091"
+  },
+  {
+    "id": "jne-1",
+    "name": "영광공공도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jne.go.kr:8311",
+    "link": "http://ebook.jne.go.kr:8311"
+  },
+  {
+    "id": "yggunlib-1",
+    "name": "영광군립도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://www.yggunlib.go.kr:88",
+    "link": "http://www.yggunlib.go.kr:88"
+  },
+  {
+    "id": "yeongdo-1",
+    "name": "영도도서관",
+    "region": "부산",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.yeongdo.go.kr:88",
+    "link": "http://ebook.yeongdo.go.kr:88"
+  },
+  {
+    "id": "gyeongnam-1",
+    "name": "영산도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "https://elib.gyeongnam.go.kr:8125",
+    "link": "https://elib.gyeongnam.go.kr:8125"
+  },
+  {
+    "id": "yeongju-1",
+    "name": "영주시립도서관",
+    "region": "경북",
+    "platform": "kyobo",
+    "baseUrl": "http://yeongju.mhebook.co.kr",
+    "link": "http://yeongju.mhebook.co.kr"
+  },
+  {
+    "id": "ysplib-1",
+    "name": "예산군립도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://www.ysplib.go.kr:9444",
+    "link": "http://www.ysplib.go.kr:9444"
+  },
+  {
+    "id": "osanlibrary-1",
+    "name": "오산시중앙도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://elib.osanlibrary.go.kr",
+    "link": "http://elib.osanlibrary.go.kr"
+  },
+  {
+    "id": "oc-1",
+    "name": "옥천군공공도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.oc.go.kr",
+    "link": "http://ebook.oc.go.kr"
+  },
+  {
+    "id": "jbe-1",
+    "name": "완주공공도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jbe.go.kr:10086",
+    "link": "http://ebook.jbe.go.kr:10086"
+  },
+  {
+    "id": "yslibrary-1",
+    "name": "용산구립도서관",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.yslibrary.or.kr",
+    "link": "http://ebook.yslibrary.or.kr"
+  },
+  {
+    "id": "yongin-1",
+    "name": "용인시립도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.yongin.go.kr",
+    "link": "http://ebook.yongin.go.kr"
+  },
+  {
+    "id": "ullib-1",
+    "name": "울릉공공도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ullib.dkyobobook.co.kr",
+    "link": "http://ullib.dkyobobook.co.kr"
+  },
+  {
+    "id": "ulsan-1",
+    "name": "울산도서관",
+    "region": "울산",
+    "platform": "kyobo",
+    "baseUrl": "http://elibrary.ulsan.go.kr",
+    "link": "http://elibrary.ulsan.go.kr"
+  },
+  {
+    "id": "usdl-1",
+    "name": "울산동구청",
+    "region": "울산",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.usdl.or.kr",
+    "link": "http://ebook.usdl.or.kr"
+  },
+  {
+    "id": "uljin-1",
+    "name": "울진군통합전자도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://uljin.mhebook.co.kr",
+    "link": "http://uljin.mhebook.co.kr"
+  },
+  {
+    "id": "wonju-1",
+    "name": "원주시립도서관",
+    "region": "강원",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.wonju.go.kr",
+    "link": "http://ebook.wonju.go.kr"
+  },
+  {
+    "id": "ebook-seogu-1",
+    "name": "월평도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook-seogu.mlss.co.kr",
+    "link": "http://ebook-seogu.mlss.co.kr"
+  },
+  {
+    "id": "eumseong-1",
+    "name": "음성군립도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://e-lib.eumseong.go.kr:8091",
+    "link": "http://e-lib.eumseong.go.kr:8091"
+  },
+  {
+    "id": "uwlib-1",
+    "name": "의왕시중앙도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://cyber.uwlib.or.kr:81",
+    "link": "http://cyber.uwlib.or.kr:81"
+  },
+  {
+    "id": "uilib-1",
+    "name": "의정부지식정보센터",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.uilib.go.kr",
+    "link": "http://ebook.uilib.go.kr"
+  },
+  {
+    "id": "sdm-1",
+    "name": "이진아기념도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.sdm.or.kr",
+    "link": "http://ebook.sdm.or.kr"
+  },
+  {
+    "id": "icheonlib-1",
+    "name": "이천시립도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://elib.icheonlib.go.kr:8080",
+    "link": "http://elib.icheonlib.go.kr:8080"
+  },
+  {
+    "id": "ss21-1",
+    "name": "익산시립도서관",
+    "region": "전북",
+    "platform": "kyobo",
+    "baseUrl": "http://www.ss21.kr:8010",
+    "link": "http://www.ss21.kr:8010"
+  },
+  {
+    "id": "iksanlib-1",
+    "name": "익산시립전자도서관(구독)",
+    "region": "전북",
+    "platform": "kyobo",
+    "baseUrl": "http://iksanlib.dkyobobook.co.kr",
+    "link": "http://iksanlib.dkyobobook.co.kr"
+  },
+  {
+    "id": "ice-1",
+    "name": "인천광역시교육청 통합전자도서관",
+    "region": "인천",
+    "platform": "kyobo",
+    "baseUrl": "http://e-lib.ice.go.kr:8091",
+    "link": "http://e-lib.ice.go.kr:8091"
+  },
+  {
+    "id": "icelib-1",
+    "name": "인천광역시교육청통합도서관(구독)",
+    "region": "인천",
+    "platform": "kyobo",
+    "baseUrl": "https://icelib.dkyobobook.co.kr",
+    "searchPath": "/search/searchList.ink",
+    "link": "https://icelib.dkyobobook.co.kr"
+  },
+  {
+    "id": "ice-1",
+    "name": "인천광역시부평도서관",
+    "region": "인천",
+    "platform": "kyobo",
+    "baseUrl": "http://e-lib.ice.go.kr:8093",
+    "link": "http://e-lib.ice.go.kr:8093"
+  },
+  {
+    "id": "ice-1",
+    "name": "인천광역시북구도서관",
+    "region": "인천",
+    "platform": "kyobo",
+    "baseUrl": "http://e-lib.ice.go.kr:8094",
+    "link": "http://e-lib.ice.go.kr:8094"
+  },
+  {
+    "id": "ice-1",
+    "name": "인천서구도서관",
+    "region": "인천",
+    "platform": "kyobo",
+    "baseUrl": "http://e-lib.ice.go.kr:8095",
+    "link": "http://e-lib.ice.go.kr:8095"
+  },
+  {
+    "id": "icdonggu-1",
+    "name": "인천송림도서관",
+    "region": "인천",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.icdonggu.go.kr:8091",
+    "link": "http://ebook.icdonggu.go.kr:8091"
+  },
+  {
+    "id": "ebook-incheonlib-1",
+    "name": "인천시 통합전자도서관",
+    "region": "인천",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook-incheonlib.mlss.co.kr",
+    "link": "http://ebook-incheonlib.mlss.co.kr"
+  },
+  {
+    "id": "jbe-1",
+    "name": "임실공공도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jbe.go.kr:10091",
+    "link": "http://ebook.jbe.go.kr:10091"
+  },
+  {
+    "id": "jne-1",
+    "name": "장성공공도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jne.go.kr:8308",
+    "link": "http://ebook.jne.go.kr:8308"
+  },
+  {
+    "id": "jangseong-1",
+    "name": "장성군립도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jangseong.go.kr:88",
+    "link": "http://ebook.jangseong.go.kr:88"
+  },
+  {
+    "id": "jslib-1",
+    "name": "장성군립도서관(구독)",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://jslib.dkyobobook.co.kr",
+    "link": "http://jslib.dkyobobook.co.kr"
+  },
+  {
+    "id": "libjeonnam-1",
+    "name": "전남도립도서관(구독)",
+    "region": "전남",
+    "platform": "kyobo",
+    "baseUrl": "http://libjeonnam.dkyobobook.co.kr",
+    "link": "http://libjeonnam.dkyobobook.co.kr"
+  },
+  {
+    "id": "jne-1",
+    "name": "전라남도교육청통합도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jne.go.kr:8300",
+    "link": "http://ebook.jne.go.kr:8300"
+  },
+  {
+    "id": "jne-1",
+    "name": "전라남도학생교육문화회관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jne.go.kr:8307",
+    "link": "http://ebook.jne.go.kr:8307"
+  },
+  {
+    "id": "jbe-1",
+    "name": "전라북도교육청통합도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jbe.go.kr:10081",
+    "link": "http://ebook.jbe.go.kr:10081"
+  },
+  {
+    "id": "jbe-1",
+    "name": "전북교육문화회관",
+    "region": "전북",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jbe.go.kr:10087",
+    "link": "http://ebook.jbe.go.kr:10087"
+  },
+  {
+    "id": "jeonju-1",
+    "name": "전주시립도서관",
+    "region": "전북",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jeonju.go.kr:88",
+    "link": "http://ebook.jeonju.go.kr:88"
+  },
+  {
+    "id": "jeongeup-1",
+    "name": "정읍시립도서관",
+    "region": "전북",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jeongeup.go.kr:88",
+    "link": "http://ebook.jeongeup.go.kr:88"
+  },
+  {
+    "id": "jbe-1",
+    "name": "정읍학생복지회관",
+    "region": "전북",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jbe.go.kr:10098",
+    "link": "http://ebook.jbe.go.kr:10098"
+  },
+  {
+    "id": "ebooks-1",
+    "name": "제주서부방음도서관",
+    "region": "제주",
+    "platform": "kyobo",
+    "baseUrl": "http://ebooks.ss21.kr:8011",
+    "link": "http://ebooks.ss21.kr:8011"
+  },
+  {
+    "id": "libebook-1",
+    "name": "제주우당도서관",
+    "region": "제주",
+    "platform": "kyobo",
+    "baseUrl": "http://libebook.jejusi.go.kr:8083",
+    "link": "http://libebook.jejusi.go.kr:8083"
+  },
+  {
+    "id": "hallalibjeju-1",
+    "name": "제주한라도서관",
+    "region": "제주",
+    "platform": "kyobo",
+    "baseUrl": "http://hallalibjeju.dkyobobook.co.kr",
+    "link": "http://hallalibjeju.dkyobobook.co.kr"
+  },
+  {
+    "id": "mlss-1",
+    "name": "제천기적의도서관",
+    "region": "충북",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.mlss.co.kr:8100",
+    "link": "http://ebook.mlss.co.kr:8100"
+  },
+  {
+    "id": "kulturkorea-1",
+    "name": "주독일한국문화원",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://kulturkorea.mhebook.co.kr",
+    "link": "http://kulturkorea.mhebook.co.kr"
+  },
+  {
+    "id": "junggulib-1",
+    "name": "중구구립도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.junggulib.or.kr:8080",
+    "link": "http://ebook.junggulib.or.kr:8080"
+  },
+  {
+    "id": "jungnanglib-1",
+    "name": "중랑구립정보도서관",
+    "region": "서울",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jungnanglib.seoul.kr:8080",
+    "link": "http://ebook.jungnanglib.seoul.kr:8080"
+  },
+  {
+    "id": "jne-1",
+    "name": "진도공공도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jne.go.kr:8306",
+    "link": "http://ebook.jne.go.kr:8306"
+  },
+  {
+    "id": "jbe-1",
+    "name": "진안공공도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jbe.go.kr:10095",
+    "link": "http://ebook.jbe.go.kr:10095"
+  },
+  {
+    "id": "gne-1",
+    "name": "진영도서관 VL",
+    "region": "부산",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gne.go.kr:9025",
+    "link": "http://ebook.gne.go.kr:9025"
+  },
+  {
+    "id": "jincheon-1",
+    "name": "진천군립도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jincheon.go.kr:8090",
+    "link": "http://ebook.jincheon.go.kr:8090"
+  },
+  {
+    "id": "gne-1",
+    "name": "창녕도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gne.go.kr:9026",
+    "link": "http://ebook.gne.go.kr:9026"
+  },
+  {
+    "id": "gne-1",
+    "name": "창원도서관",
+    "region": "경남",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.gne.go.kr:9027",
+    "link": "http://ebook.gne.go.kr:9027"
+  },
+  {
+    "id": "gyeongnam-1",
+    "name": "창원시립의창도서관",
+    "region": "경남",
+    "platform": "kyobo",
+    "baseUrl": "https://elib.gyeongnam.go.kr:8122",
+    "link": "https://elib.gyeongnam.go.kr:8122"
+  },
+  {
+    "id": "cheonan-1",
+    "name": "천안시중앙도서관",
+    "region": "충남",
+    "platform": "kyobo",
+    "baseUrl": "http://elib.cheonan.go.kr:8091",
+    "link": "http://elib.cheonan.go.kr:8091"
+  },
+  {
+    "id": "cheongdo-1",
+    "name": "청도어린이도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.cheongdo.go.kr",
+    "link": "http://ebook.cheongdo.go.kr"
+  },
+  {
+    "id": "cjelib-1",
+    "name": "청주시립도서관",
+    "region": "충북",
+    "platform": "kyobo",
+    "baseUrl": "http://cjelib.cheongju.go.kr:8080",
+    "link": "http://cjelib.cheongju.go.kr:8080"
+  },
+  {
+    "id": "chuncheon-1",
+    "name": "춘천시립도서관",
+    "region": "강원",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.chuncheon.go.kr",
+    "link": "http://ebook.chuncheon.go.kr"
+  },
+  {
+    "id": "chungnam-1",
+    "name": "충남도서관",
+    "region": "충남",
+    "platform": "kyobo",
+    "baseUrl": "http://elibrary.chungnam.go.kr:8091",
+    "link": "http://elibrary.chungnam.go.kr:8091"
+  },
+  {
+    "id": "cbe-1",
+    "name": "충북중앙도서관",
+    "region": "충북",
+    "platform": "kyobo",
+    "baseUrl": "http://e-lib.cbe.go.kr:8092",
+    "link": "http://e-lib.cbe.go.kr:8092"
+  },
+  {
+    "id": "chungju-1",
+    "name": "충주시립도서관",
+    "region": "충북",
+    "platform": "kyobo",
+    "baseUrl": "http://e-lib.chungju.go.kr:8090",
+    "link": "http://e-lib.chungju.go.kr:8090"
+  },
+  {
+    "id": "충청남도교육청 통합전자도서관-1",
+    "name": "충청남도교육청 통합전자도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://충청남도교육청 통합전자도서관",
+    "link": "http://충청남도교육청 통합전자도서관"
+  },
+  {
+    "id": "cbe-1",
+    "name": "충청북도교육정보원",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.cbe.go.kr",
+    "link": "http://ebook.cbe.go.kr"
+  },
+  {
+    "id": "chungbuk-1",
+    "name": "충청북도청",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://elib.chungbuk.go.kr",
+    "link": "http://elib.chungbuk.go.kr"
+  },
+  {
+    "id": "chilgok-1",
+    "name": "칠곡도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.chilgok.go.kr",
+    "link": "http://ebook.chilgok.go.kr"
+  },
+  {
+    "id": "gyeongnam-1",
+    "name": "통영시립도서관",
+    "region": "경남",
+    "platform": "kyobo",
+    "baseUrl": "https://elib.gyeongnam.go.kr:8123",
+    "link": "https://elib.gyeongnam.go.kr:8123"
+  },
+  {
+    "id": "lib2-1",
+    "name": "파주시중앙도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://lib2.paju.go.kr",
+    "link": "http://lib2.paju.go.kr"
+  },
+  {
+    "id": "ptlib-1",
+    "name": "평택시립도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.ptlib.go.kr",
+    "link": "http://ebook.ptlib.go.kr"
+  },
+  {
+    "id": "lebook-1",
+    "name": "포항시립도서관",
+    "region": "경북",
+    "platform": "kyobo",
+    "baseUrl": "http://lebook.pohang.go.kr:8085",
+    "link": "http://lebook.pohang.go.kr:8085"
+  },
+  {
+    "id": "hanamlib-1",
+    "name": "하남시립도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.hanamlib.go.kr",
+    "link": "http://ebook.hanamlib.go.kr"
+  },
+  {
+    "id": "hspls-klf-1",
+    "name": "한국도서재단",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://hspls-klf.dkyobobook.co.kr",
+    "link": "http://hspls-klf.dkyobobook.co.kr"
+  },
+  {
+    "id": "u-library-1",
+    "name": "한밭도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.u-library.kr",
+    "link": "http://ebook.u-library.kr"
+  },
+  {
+    "id": "hygn-1",
+    "name": "함양군청 전자도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://hygn.dkyobobook.co.kr",
+    "link": "http://hygn.dkyobobook.co.kr"
+  },
+  {
+    "id": "jne-1",
+    "name": "해남공공도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jne.go.kr:8304",
+    "link": "http://ebook.jne.go.kr:8304"
+  },
+  {
+    "id": "haenam-1",
+    "name": "해남군립도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://e-book.haenam.go.kr:88",
+    "link": "http://e-book.haenam.go.kr:88"
+  },
+  {
+    "id": "hmlib-1",
+    "name": "해밀도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.hmlib.or.kr:8091",
+    "link": "http://ebook.hmlib.or.kr:8091"
+  },
+  {
+    "id": "ihl-1",
+    "name": "화도진도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.ihl.kr:8097",
+    "link": "http://ebook.ihl.kr:8097"
+  },
+  {
+    "id": "hscitylib-1",
+    "name": "화성시립도서관",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.hscitylib.or.kr",
+    "link": "http://ebook.hscitylib.or.kr"
+  },
+  {
+    "id": "hscitylib-1",
+    "name": "화성시립도서관(구독)",
+    "region": "경기",
+    "platform": "kyobo",
+    "baseUrl": "http://hscitylib.dkyobobook.co.kr",
+    "link": "http://hscitylib.dkyobobook.co.kr"
+  },
+  {
+    "id": "jne-1",
+    "name": "화순도서관",
+    "region": "기타",
+    "platform": "kyobo",
+    "baseUrl": "http://ebook.jne.go.kr:8305",
+    "link": "http://ebook.jne.go.kr:8305"
+  }
+]

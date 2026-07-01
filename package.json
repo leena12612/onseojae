@@ -1,0 +1,16 @@
+{
+  "name": "onseojae",
+  "private": true,
+  "workspaces": ["client", "server"],
+  "scripts": {
+    "start": "concurrently -n client,server -c cyan,green \"yarn workspace onseojae-client dev\" \"yarn workspace onseojae-server dev\"",
+    "dev": "yarn start",
+    "dev:client": "yarn workspace onseojae-client dev",
+    "dev:server": "yarn workspace onseojae-server dev",
+    "build": "yarn workspace onseojae-client build",
+    "prod": "NODE_ENV=production node server/index.js"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

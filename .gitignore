@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Build output
+client/dist/
+
+# Environment variables (API 키 포함 - 절대 올리면 안됨)
+.env
+.env.local
+.env.production
+server/.env
+
+# Logs
+yarn-error.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
