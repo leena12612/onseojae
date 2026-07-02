@@ -6,6 +6,7 @@ function naverHeaders() {
   return {
     'X-Naver-Client-Id':     process.env.NAVER_CLIENT_ID,
     'X-Naver-Client-Secret': process.env.NAVER_CLIENT_SECRET,
+    'Referer': process.env.CLIENT_ORIGIN || 'http://localhost:3000',
   }
 }
 
