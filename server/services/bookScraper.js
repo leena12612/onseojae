@@ -18,18 +18,44 @@ export async function searchBooks(query, { page = 1, sort = 'sim' } = {}) {
     return { books: MOCK_SEARCH, totalCount: MOCK_SEARCH.length, mergedCount: 2, page: 1, pageSize: PAGE_SIZE }
   }
 
-  const start = (page - 1) * PAGE_SIZE + 1
-  const { data } = await axios.get('https://openapi.naver.com/v1/search/book.json', {
-    params: { query, display: PAGE_SIZE, start, sort },
-    headers: naverHeaders(),
-    timeout: 6000,
+  try {
+    const start = (page - 1) * PAGE_SIZE + 1
+    const { data } = await axios.get('https://openapi.naver.com/v1/search/book.json', {
+      params: { query, display: PAGE_SIZE, start, sort },
+      headers: naverHeaders(),
+      timeout: 6000,
+    })
+    const books = (data.items || []).map(mapNaverItem)
+    const isbns = books.map(b => b.isbn).filter(Boolean)
+    const mergedCount = isbns.length - new Set(isbns).size
+    return { books, totalCount: data.total || books.length, mergedCount, page, pageSize: PAGE_SIZE }
+  } catch {
+    return searchBooksAladin(query, page)
+  }
+}
+
+async function searchBooksAladin(query, page = 1) {
+  const ttbKey = process.env.ALADIN_TTB_KEY
+  if (!ttbKey) return { books: [], totalCount: 0, mergedCount: 0, page, pageSize: PAGE_SIZE }
+  const { data } = await axios.get('http://www.aladin.co.kr/ttb/api/ItemSearch.aspx', {
+    params: { ttbkey: ttbKey, Query: query, QueryType: 'Keyword', MaxResults: PAGE_SIZE, start: page, SearchTarget: 'Book', output: 'js', Version: '20131101' },
+    timeout: 8000,
   })
-
-  const books = (data.items || []).map(mapNaverItem)
-  const isbns = books.map(b => b.isbn).filter(Boolean)
-  const mergedCount = isbns.length - new Set(isbns).size
-
-  return { books, totalCount: data.total || books.length, mergedCount, page, pageSize: PAGE_SIZE }
+  const books = (data.item || []).map(item => ({
+    isbn:          item.isbn13 || item.isbn || '',
+    title:         item.title || '',
+    author:        item.author || '',
+    publisher:     item.publisher || '',
+    publishedAt:   (item.pubDate || '').slice(0, 7),
+    platform:      'aladin',
+    platformLabel: '알라딘',
+    price:         item.priceSales || item.priceStandard || 0,
+    originalPrice: item.priceStandard || 0,
+    discountRate:  null,
+    coverUrl:      item.cover || '',
+    description:   item.description || '',
+  }))
+  return { books, totalCount: data.totalResults || books.length, mergedCount: 0, page, pageSize: PAGE_SIZE }
 }
 
 export async function getBookByISBN(isbn) {
