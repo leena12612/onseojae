@@ -13,7 +13,7 @@ function naverHeaders() {
 const PAGE_SIZE = 10
 
 export async function searchBooks(query, { page = 1, sort = 'sim' } = {}) {
-  if (process.env.USE_MOCK !== 'false') {
+  if (process.env.USE_MOCK === 'true') {
     await delay(300)
     return { books: MOCK_SEARCH, totalCount: MOCK_SEARCH.length, mergedCount: 2, page: 1, pageSize: PAGE_SIZE }
   }
@@ -33,7 +33,7 @@ export async function searchBooks(query, { page = 1, sort = 'sim' } = {}) {
 }
 
 export async function getBookByISBN(isbn) {
-  if (process.env.USE_MOCK !== 'false') {
+  if (process.env.USE_MOCK === 'true') {
     await delay(200)
     return MOCK_DETAIL[isbn] ?? null
   }
