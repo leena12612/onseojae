@@ -11,6 +11,16 @@ function naverHeaders() {
 }
 
 const PAGE_SIZE = 10
+const cache = new Map()
+const CACHE_TTL = 60 * 60 * 1000
+
+function cacheGet(key) {
+  const hit = cache.get(key)
+  if (hit && Date.now() - hit.t < CACHE_TTL) return hit.v
+  cache.delete(key)
+  return null
+}
+function cacheSet(key, value) { cache.set(key, { v: value, t: Date.now() }) }
 
 export async function searchBooks(query, { page = 1, sort = 'sim' } = {}) {
   if (process.env.USE_MOCK === 'true') {
@@ -39,6 +49,10 @@ export async function searchBooks(query, { page = 1, sort = 'sim' } = {}) {
 }
 
 async function searchBooksAladin(query, page = 1) {
+  const cacheKey = `search:${query}:${page}`
+  const cached = cacheGet(cacheKey)
+  if (cached) return cached
+
   const ttbKey = process.env.ALADIN_TTB_KEY
   if (!ttbKey) return { books: [], totalCount: 0, mergedCount: 0, page, pageSize: PAGE_SIZE }
   const { data } = await axios.get('http://www.aladin.co.kr/ttb/api/ItemSearch.aspx', {
@@ -59,7 +73,9 @@ async function searchBooksAladin(query, page = 1) {
     coverUrl:      item.cover || '',
     description:   item.description || '',
   }))
-  return { books, totalCount: data.totalResults || books.length, mergedCount: 0, page, pageSize: PAGE_SIZE }
+  const result = { books, totalCount: data.totalResults || books.length, mergedCount: 0, page, pageSize: PAGE_SIZE }
+  cacheSet(cacheKey, result)
+  return result
 }
 
 export async function getBookByISBN(isbn) {
@@ -109,6 +125,10 @@ export async function getBookByISBN(isbn) {
 }
 
 async function getBookByISBNAladin(isbn) {
+  const cacheKey = `isbn:${isbn}`
+  const cached = cacheGet(cacheKey)
+  if (cached) return cached
+
   const ttbKey = process.env.ALADIN_TTB_KEY
   if (!ttbKey) return null
   const { data } = await axios.get('http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx', {
@@ -133,6 +153,8 @@ async function getBookByISBNAladin(isbn) {
     prices: [{ platform: '알라딘', price, originalPrice, isLowest: true, link: item.link || '' }],
     subscriptionDetails: [],
   }
+  cacheSet(cacheKey, result)
+  return result
 }
 
 // ─── 변환 헬퍼 ─────────────────────────────────────────────────────────────────
