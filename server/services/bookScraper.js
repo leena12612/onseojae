@@ -18,6 +18,10 @@ export async function searchBooks(query, { page = 1, sort = 'sim' } = {}) {
     return { books: MOCK_SEARCH, totalCount: MOCK_SEARCH.length, mergedCount: 2, page: 1, pageSize: PAGE_SIZE }
   }
 
+  if (process.env.USE_ALADIN_SEARCH === 'true') {
+    return searchBooksAladin(query, page)
+  }
+
   try {
     const start = (page - 1) * PAGE_SIZE + 1
     const { data } = await axios.get('https://openapi.naver.com/v1/search/book.json', {
@@ -64,6 +68,10 @@ export async function getBookByISBN(isbn) {
     return MOCK_DETAIL[isbn] ?? null
   }
 
+  if (process.env.USE_ALADIN_SEARCH === 'true') {
+    return getBookByISBNAladin(isbn)
+  }
+
   const { data } = await axios.get('https://openapi.naver.com/v1/search/book_adv.json', {
     params: { d_isbn: isbn },
     headers: naverHeaders(),
@@ -96,6 +104,33 @@ export async function getBookByISBN(isbn) {
         link:          item.link,
       },
     ],
+    subscriptionDetails: [],
+  }
+}
+
+async function getBookByISBNAladin(isbn) {
+  const ttbKey = process.env.ALADIN_TTB_KEY
+  if (!ttbKey) return null
+  const { data } = await axios.get('http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx', {
+    params: { ttbkey: ttbKey, itemIdType: 'ISBN13', ItemId: isbn, Cover: 'Big', output: 'js', Version: '20131101' },
+    timeout: 8000,
+  })
+  const item = data.item?.[0]
+  if (!item) return null
+  const price = item.priceSales || item.priceStandard || 0
+  const originalPrice = item.priceStandard || 0
+  return {
+    isbn,
+    title:       item.title || '',
+    author:      item.author || '',
+    publisher:   item.publisher || '',
+    publishedAt: (item.pubDate || '').slice(0, 7),
+    coverUrl:    (item.cover || '').replace('coversum', 'cover500'),
+    description: item.description || '',
+    lowestPrice: price,
+    libraryCount: 0,
+    subscriptions: [],
+    prices: [{ platform: '알라딘', price, originalPrice, isLowest: true, link: item.link || '' }],
     subscriptionDetails: [],
   }
 }
