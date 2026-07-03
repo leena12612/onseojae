@@ -17,6 +17,7 @@ export default function BookDetailPage() {
   const [reviewsLoading, setReviewsLoading] = useState(true)
   const [descExpanded, setDescExpanded] = useState(false)
   const [authorBooks, setAuthorBooks] = useState([])
+  const [authorBooksLoading, setAuthorBooksLoading] = useState(true)
   const { isBookmarked, toggle: toggleBookmark } = useBookmarks()
 
   useEffect(() => {
@@ -25,6 +26,8 @@ export default function BookDetailPage() {
     setReviewsLoading(true)
     setPrices([])
     setReviews([])
+    setAuthorBooks([])
+    setAuthorBooksLoading(true)
 
     let bookData = null
 
@@ -52,9 +55,15 @@ export default function BookDetailPage() {
           axios.get(`/api/books/${isbn}/author-books`, { params: { author: bookData.author } })
             .then(({ data: d }) => setAuthorBooks(d.books || []))
             .catch(() => {})
+            .finally(() => setAuthorBooksLoading(false))
+        } else {
+          setAuthorBooksLoading(false)
         }
       })
-      .catch(console.error)
+      .catch(err => {
+        console.error(err)
+        setAuthorBooksLoading(false)
+      })
       .finally(() => {
         setLoading(false)
         setPricesLoading(false)
@@ -149,7 +158,14 @@ export default function BookDetailPage() {
           {/* 오른쪽 컬럼 */}
           <div className="flex flex-col gap-5">
             <PriceComparison prices={prices} loading={pricesLoading} />
-            {authorBooks.length > 0 && (
+            {authorBooksLoading ? (
+              <div className="bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/[0.06] p-5">
+                <div className="skeleton h-4 w-28 mb-3" />
+                <div className="grid grid-cols-4 sm:grid-cols-3 gap-2">
+                  {[...Array(6)].map((_, i) => <div key={i} className="skeleton w-full aspect-[2/3] rounded-lg" />)}
+                </div>
+              </div>
+            ) : authorBooks.length > 0 && (
               <div className="bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/[0.06] p-5">
                 <h2 className="font-semibold text-slate-800 mb-3">같은 작가의 다른 책</h2>
                 <div className="grid grid-cols-4 sm:grid-cols-3 gap-2">
@@ -227,13 +243,58 @@ function DetailSkeleton() {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-5">
           <div className="space-y-5">
-            <div className="bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/[0.06] p-6 space-y-3">
-              <div className="skeleton h-4 w-1/3" />
-              {[...Array(3)].map((_, i) => <div key={i} className="skeleton h-3 w-full" />)}
+            <div className="bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/[0.06] overflow-hidden">
+              <div className="px-5 py-4 border-b border-slate-100">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="skeleton h-4 w-36" />
+                  <div className="skeleton h-4 w-16 rounded-full" />
+                </div>
+                <div className="skeleton h-1 w-full rounded-full" />
+              </div>
+              <div className="px-5 py-1">
+                {[...Array(6)].map((_, i) => (
+                  <div key={i} className="flex items-center justify-between py-3.5 border-b border-slate-50 last:border-0">
+                    <div className="skeleton h-4 w-24" />
+                    <div className="skeleton h-3 w-3" />
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/[0.06] overflow-hidden">
+              <div className="px-5 py-4 border-b border-slate-100">
+                <div className="skeleton h-4 w-16" />
+              </div>
+              {[...Array(2)].map((_, i) => (
+                <div key={i} className="p-4 border-b border-slate-100 space-y-2">
+                  <div className="skeleton h-4 w-32 mb-1" />
+                  <div className="skeleton h-3 w-full" />
+                  <div className="skeleton h-3 w-full" />
+                  <div className="skeleton h-3 w-2/3" />
+                </div>
+              ))}
+              <div className="px-5 py-2">
+                {[...Array(3)].map((_, i) => (
+                  <div key={i} className="flex items-center justify-between py-2.5">
+                    <div className="skeleton h-4 w-20" />
+                    <div className="skeleton h-4 w-24" />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-          <div className="bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/[0.06] p-5 space-y-4">
-            {[...Array(3)].map((_, i) => <div key={i} className="skeleton h-20 w-full rounded-xl" />)}
+          <div className="space-y-5">
+            <div className="bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/[0.06] p-5">
+              <div className="skeleton h-4 w-16 mb-3" />
+              <div className="space-y-2">
+                {[...Array(4)].map((_, i) => <div key={i} className="skeleton h-11 w-full rounded-lg" />)}
+              </div>
+            </div>
+            <div className="bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/[0.06] p-5">
+              <div className="skeleton h-4 w-28 mb-3" />
+              <div className="grid grid-cols-4 sm:grid-cols-3 gap-2">
+                {[...Array(6)].map((_, i) => <div key={i} className="skeleton w-full aspect-[2/3] rounded-lg" />)}
+              </div>
+            </div>
           </div>
         </div>
       </div>
