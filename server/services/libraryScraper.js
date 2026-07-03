@@ -23,8 +23,9 @@ async function fetchHtml(url, params, { retries = 1 } = {}) {
       const charset = charsetMatch ? charsetMatch[1] : 'utf-8'
       return iconv.decode(buf, charset)
     } catch (err) {
-      if (attempt >= retries) throw err
-      await delay(500 * (attempt + 1))
+      const isTimeout = err.code === 'ECONNABORTED' || /timeout/i.test(err.message)
+      if (attempt >= retries || isTimeout) throw err
+      await delay(300)
     }
   }
 }

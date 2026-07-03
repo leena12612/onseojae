@@ -126,6 +126,7 @@ export default function LibraryAvailability({ isbn, title, author }) {
   const [grouped, setGrouped]               = useState({})
   const [loading, setLoading]               = useState(true)
   const [total, setTotal]                   = useState(0)
+  const [checkedCount, setCheckedCount]     = useState(0)
   const [availableTotal, setAvailableTotal] = useState(0)
   const [selectedRegion, setSelectedRegion] = useState('전체')
   const esRef = useRef(null)
@@ -136,6 +137,7 @@ export default function LibraryAvailability({ isbn, title, author }) {
     setGrouped({})
     setLoading(true)
     setTotal(0)
+    setCheckedCount(0)
     setAvailableTotal(0)
 
     if (esRef.current) esRef.current.close()
@@ -146,6 +148,7 @@ export default function LibraryAvailability({ isbn, title, author }) {
 
     es.addEventListener('region', (e) => {
       const { region, libraries } = JSON.parse(e.data)
+      setCheckedCount(c => c + libraries.length)
       setGrouped(prev => ({ ...prev, [region]: libraries.filter(l => l.status !== 'error' && l.status !== 'not_held') }))
     })
     es.addEventListener('count', (e) => {
@@ -156,6 +159,7 @@ export default function LibraryAvailability({ isbn, title, author }) {
       const { availableCount, total } = JSON.parse(e.data)
       setAvailableTotal(availableCount)
       setTotal(total)
+      setCheckedCount(total)
       setLoading(false)
       es.close()
     })
@@ -285,10 +289,10 @@ export default function LibraryAvailability({ isbn, title, author }) {
               />
             )
           })}
-          {loading && totalLibraries > 0 && (
+          {loading && checkedCount > 0 && (
             <div className="px-5 py-3 flex items-center gap-2 text-xs text-slate-400 border-t border-slate-50">
               <span className="w-3 h-3 border-2 border-brand-300 border-t-transparent rounded-full animate-spin" />
-              {total > 0 ? `${totalLibraries} / ${total}곳 조회 중...` : '조회 중...'}
+              {total > 0 ? `${checkedCount} / ${total}곳 조회 중...` : '조회 중...'}
             </div>
           )}
         </div>

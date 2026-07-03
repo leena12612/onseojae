@@ -3,7 +3,7 @@ import { getLibraryList, scrapeOne } from '../services/libraryScraper.js'
 import { pLimit } from '../utils/pLimit.js'
 
 const router = Router()
-const CONCURRENCY = 20
+const CONCURRENCY = 40
 
 /**
  * SSE 스트리밍
