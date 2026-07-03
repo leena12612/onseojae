@@ -7,19 +7,26 @@ const LIBRARIES = createRequire(import.meta.url)('../data/libraries.json')
 
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0'
 
-async function fetchHtml(url, params) {
-  const res = await axios.get(url, {
-    params,
-    headers: { 'User-Agent': UA },
-    timeout: 10000,
-    responseType: 'arraybuffer',
-  })
-  const buf = Buffer.from(res.data)
-  if (buf.length === 0) return ''
-  const tmp = buf.slice(0, 2000).toString('latin1')
-  const charsetMatch = tmp.match(/charset=['""]?([a-zA-Z0-9\-]+)/i)
-  const charset = charsetMatch ? charsetMatch[1] : 'utf-8'
-  return iconv.decode(buf, charset)
+async function fetchHtml(url, params, { retries = 1 } = {}) {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      const res = await axios.get(url, {
+        params,
+        headers: { 'User-Agent': UA },
+        timeout: 10000,
+        responseType: 'arraybuffer',
+      })
+      const buf = Buffer.from(res.data)
+      if (buf.length === 0) return ''
+      const tmp = buf.slice(0, 2000).toString('latin1')
+      const charsetMatch = tmp.match(/charset=['""]?([a-zA-Z0-9\-]+)/i)
+      const charset = charsetMatch ? charsetMatch[1] : 'utf-8'
+      return iconv.decode(buf, charset)
+    } catch (err) {
+      if (attempt >= retries) throw err
+      await delay(500 * (attempt + 1))
+    }
+  }
 }
 
 export function getLibraryList() {

@@ -1,7 +1,9 @@
 import { Router } from 'express'
 import { getLibraryList, scrapeOne } from '../services/libraryScraper.js'
+import { pLimit } from '../utils/pLimit.js'
 
 const router = Router()
+const CONCURRENCY = 20
 
 /**
  * SSE 스트리밍
@@ -32,11 +34,12 @@ router.get('/:isbn/stream', async (req, res) => {
   }, {})
 
   let availableCount = 0
+  const limit = pLimit(CONCURRENCY)
 
   await Promise.all(
     Object.entries(grouped).map(async ([region, libs]) => {
       const results = await Promise.allSettled(
-        libs.map(lib => scrapeOne(isbn, lib, { title, author }))
+        libs.map(lib => limit(() => scrapeOne(isbn, lib, { title, author })))
       )
 
       const regionLibraries = results.map((r, i) =>
@@ -67,8 +70,9 @@ router.get('/:isbn', async (req, res) => {
 
   try {
     const libraries = getLibraryList()
+    const limit = pLimit(CONCURRENCY)
     const results = await Promise.allSettled(
-      libraries.map(lib => scrapeOne(isbn, lib, { title, author }))
+      libraries.map(lib => limit(() => scrapeOne(isbn, lib, { title, author })))
     )
 
     const flat = results.map((r, i) =>
