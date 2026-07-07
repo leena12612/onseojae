@@ -5,12 +5,11 @@ import { pLimit } from '../utils/pLimit.js'
 const router = Router()
 const CONCURRENCY = 40
 
-// region 메타데이터가 없는 도서관('기타')이 많아 지역 필터에서 통째로 누락되지 않도록 항상 포함
 function scopeToRegion(libraries, region) {
   if (!region) return libraries
   const selected = region.split(',').map(r => r.trim()).filter(Boolean)
   if (selected.length === 0) return libraries
-  return libraries.filter(lib => selected.includes(lib.region) || lib.region === '기타')
+  return libraries.filter(lib => selected.includes(lib.region))
 }
 
 /**

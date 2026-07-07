@@ -1,16 +1,36 @@
 import { useState, useRef, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 
 export default function RegionMultiSelect({ regions, selected, onChange, title }) {
   const [open, setOpen] = useState(false)
-  const ref = useRef(null)
+  const [coords, setCoords] = useState(null)
+  const btnRef = useRef(null)
+  const panelRef = useRef(null)
 
   useEffect(() => {
     if (!open) return
     const onClickOutside = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) setOpen(false)
+      if (btnRef.current?.contains(e.target)) return
+      if (panelRef.current?.contains(e.target)) return
+      setOpen(false)
     }
     document.addEventListener('mousedown', onClickOutside)
     return () => document.removeEventListener('mousedown', onClickOutside)
+  }, [open])
+
+  useEffect(() => {
+    if (!open) return
+    const updateCoords = () => {
+      const rect = btnRef.current.getBoundingClientRect()
+      setCoords({ top: rect.bottom + 6, right: window.innerWidth - rect.right })
+    }
+    updateCoords()
+    window.addEventListener('scroll', updateCoords, true)
+    window.addEventListener('resize', updateCoords)
+    return () => {
+      window.removeEventListener('scroll', updateCoords, true)
+      window.removeEventListener('resize', updateCoords)
+    }
   }, [open])
 
   const toggleRegion = (r) => {
@@ -24,8 +44,9 @@ export default function RegionMultiSelect({ regions, selected, onChange, title }
       : `${selected[0]} 외 ${selected.length - 1}곳`
 
   return (
-    <div className="relative" ref={ref}>
+    <>
       <button
+        ref={btnRef}
         type="button"
         onClick={() => setOpen(v => !v)}
         title={title}
@@ -38,8 +59,12 @@ export default function RegionMultiSelect({ regions, selected, onChange, title }
         </svg>
       </button>
 
-      {open && (
-        <div className="absolute right-0 mt-2 w-44 bg-white rounded-xl shadow-lg ring-1 ring-slate-900/[0.06] p-1.5 z-50 max-h-72 overflow-y-auto">
+      {open && coords && createPortal(
+        <div
+          ref={panelRef}
+          style={{ position: 'fixed', top: coords.top, right: coords.right }}
+          className="w-44 bg-white rounded-xl shadow-lg ring-1 ring-slate-900/[0.06] p-1.5 z-50 max-h-72 overflow-y-auto"
+        >
           <button
             type="button"
             onClick={() => onChange([])}
@@ -53,6 +78,7 @@ export default function RegionMultiSelect({ regions, selected, onChange, title }
           {regions.map((r) => (
             <label
               key={r}
+              title={r === '기타' ? '지역 정보가 없는 도서관' : undefined}
               className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-slate-50 cursor-pointer text-xs text-slate-600"
             >
               <input
@@ -61,11 +87,12 @@ export default function RegionMultiSelect({ regions, selected, onChange, title }
                 onChange={() => toggleRegion(r)}
                 className="rounded border-slate-300 text-brand-500 focus:ring-brand-300"
               />
-              {r}
+              {r === '기타' ? '기타 (지역 미분류)' : r}
             </label>
           ))}
-        </div>
+        </div>,
+        document.body
       )}
-    </div>
+    </>
   )
 }

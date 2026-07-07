@@ -1,8 +1,10 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import StatusBadge from './StatusBadge'
 import RegionFilter from './RegionFilter'
+import RegionMultiSelect from './RegionMultiSelect'
 import useLibraryFavorites from '../hooks/useLibraryFavorites'
 import useRegionPreference from '../hooks/useRegionPreference'
+import { REGIONS } from '../constants/regions'
 
 const PLATFORM_LABEL = {
   kyobo:    '교보',
@@ -183,8 +185,6 @@ export default function LibraryAvailability({ isbn, title, author }) {
     return () => esRef.current?.close()
   }, [connect])
 
-  const widenToNationwide = () => setScope([])
-
   const REGION_ORDER = ['서울', '인천', '대전 / 세종', '대구', '울산', '부산', '광주', '경기', '강원', '충북 / 충남', '전북 / 전남', '경북 / 경남', '제주']
   const regions = Object.keys(grouped).sort((a, b) => {
     const ia = REGION_ORDER.indexOf(a), ib = REGION_ORDER.indexOf(b)
@@ -208,6 +208,11 @@ export default function LibraryAvailability({ isbn, title, author }) {
                 d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
             <h2 className="font-semibold text-slate-800 text-sm">공공도서관 소장 현황</h2>
+            {!loading && (
+              <span className="text-xs font-medium text-emerald-600 bg-emerald-50 border border-emerald-200 rounded-full px-2.5 py-0.5">
+                대출가능 {availableTotal}개관
+              </span>
+            )}
           </div>
           <div className="flex items-center gap-2">
             {loading && (
@@ -228,31 +233,27 @@ export default function LibraryAvailability({ isbn, title, author }) {
           </div>
         </div>
 
-        {scope.length > 0 && (
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-xs text-slate-500 bg-slate-50 border border-slate-200 rounded-full px-2.5 py-1">
-              {scope.join(', ')} 지역만 조회 중
-            </span>
-            <button
-              onClick={widenToNationwide}
-              className="text-xs text-brand-500 hover:underline font-medium"
-            >
-              전국으로 넓혀보기
-            </button>
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 text-xs font-semibold text-brand-600 bg-brand-50 hover:bg-brand-100 transition-all px-3 py-1.5 rounded-full">
+            <svg className="w-3.5 h-3.5 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <RegionMultiSelect
+              regions={REGIONS}
+              selected={scope}
+              onChange={setScope}
+              title="도서관 조회 지역"
+            />
           </div>
-        )}
-
-        {/* 통계 pills */}
-        {!loading && (
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-emerald-600 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1">
-              대출가능 {availableTotal}개관
-            </span>
-          </div>
-        )}
+          {scope.length > 0 && (
+            <span className="text-xs text-slate-400">이 책에서만 적용돼요</span>
+          )}
+        </div>
 
         {loading && (
-          <div className="mt-2 h-1 bg-slate-100 rounded-full overflow-hidden">
+          <div className="mt-3 h-1 bg-slate-100 rounded-full overflow-hidden">
             <div className="h-full bg-brand-400 rounded-full animate-pulse w-full" />
           </div>
         )}

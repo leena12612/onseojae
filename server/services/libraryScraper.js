@@ -151,7 +151,13 @@ function findBestMatch($, selector, title, author, extractor) {
   $(selector).each((_, el) => {
     const $el = $(el)
     const info = extractor($el)
-    const score = similarity(info.titleText, title) + (author ? similarity(info.authorText, author) * 0.3 : 0)
+    const authorScore = author ? similarity(info.authorText, author) : null
+
+    // 저자 정보가 있는데 후보의 저자와 거의 겹치지 않으면 (짧은 제목이 우연히 다른 책 제목에
+    // 부분 문자열로 포함되는 경우 등) 오탐이므로 후보에서 제외
+    if (author && authorScore < 0.3) return
+
+    const score = similarity(info.titleText, title) + (author ? authorScore * 0.3 : 0)
     if (score > bestScore) {
       bestScore = score
       best = info
