@@ -27,6 +27,13 @@ export default function StatusBadge({ status, reservations, available, total, er
     case 'found':
       return <span className="text-xs text-slate-500">소장</span>
 
+    case 'audio_only':
+      return (
+        <span className="inline-flex items-center gap-1 text-xs font-medium bg-indigo-50 text-indigo-500 border border-indigo-200 rounded px-2 py-0.5">
+          🎧 오디오북으로 소장
+        </span>
+      )
+
     case 'not_held':
       return <span className="text-xs text-slate-400">미소장</span>
 
