@@ -157,8 +157,10 @@ export default function LibraryAvailability({ isbn, title, author }) {
 
     es.addEventListener('region', (e) => {
       const { region, libraries } = JSON.parse(e.data)
-      setCheckedCount(c => c + libraries.length)
       setGrouped(prev => ({ ...prev, [region]: libraries.filter(l => l.status !== 'error' && l.status !== 'not_held') }))
+    })
+    es.addEventListener('progress', () => {
+      setCheckedCount(c => c + 1)
     })
     es.addEventListener('count', (e) => {
       const { total } = JSON.parse(e.data)
@@ -216,10 +218,7 @@ export default function LibraryAvailability({ isbn, title, author }) {
           </div>
           <div className="flex items-center gap-2">
             {loading && (
-              <span className="flex items-center gap-1.5 text-xs text-slate-400">
-                <span className="w-3 h-3 border-2 border-brand-400 border-t-transparent rounded-full animate-spin" />
-                {total > 0 && `${total}곳`}
-              </span>
+              <span className="w-3 h-3 border-2 border-brand-400 border-t-transparent rounded-full animate-spin" />
             )}
             <RegionFilter regions={allRegions} selected={selectedRegion} onChange={setSelectedRegion} />
             {!loading && (

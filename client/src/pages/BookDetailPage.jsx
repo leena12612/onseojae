@@ -21,54 +21,71 @@ export default function BookDetailPage() {
   const { isBookmarked, toggle: toggleBookmark } = useBookmarks()
 
   useEffect(() => {
+    let cancelled = false
+
     setLoading(true)
+    setBook(null)
     setPricesLoading(true)
     setReviewsLoading(true)
+    setAuthorBooksLoading(true)
     setPrices([])
     setReviews([])
     setAuthorBooks([])
-    setAuthorBooksLoading(true)
-
-    let bookData = null
 
     axios.get(`/api/books/${isbn}`)
       .then(({ data }) => {
-        bookData = data
+        if (cancelled) return
         setBook(data)
-        const params = data.title ? `?title=${encodeURIComponent(data.title)}` : ''
-        return axios.get(`/api/books/${isbn}/prices${params}`)
-      })
-      .then(({ data }) => {
-        const fetchedPrices = data.prices || []
-        setPrices(fetchedPrices)
-        setPricesLoading(false)
+        setLoading(false)
 
-        const yes24Link = fetchedPrices.find(p => p.platform === '예스24')?.link || ''
-        const kyoboLink = fetchedPrices.find(p => p.platform === '교보문고')?.link || ''
-        const title     = bookData?.title || ''
-        const params    = new URLSearchParams({ title, yes24Link, kyoboLink }).toString()
-        return axios.get(`/api/books/${isbn}/reviews?${params}`)
-      })
-      .then(({ data }) => {
-        setReviews(data.reviews || [])
-        if (bookData?.author) {
-          axios.get(`/api/books/${isbn}/author-books`, { params: { author: bookData.author } })
-            .then(({ data: d }) => setAuthorBooks(d.books || []))
+        // 가격 비교, 같은 작가의 다른 책은 책 정보만 있으면 바로 조회 가능하므로 병렬로 시작
+        const priceParams = data.title ? `?title=${encodeURIComponent(data.title)}` : ''
+        const pricesPromise = axios.get(`/api/books/${isbn}/prices${priceParams}`)
+          .then(({ data: priceData }) => {
+            const fetchedPrices = priceData.prices || []
+            if (!cancelled) {
+              setPrices(fetchedPrices)
+              setPricesLoading(false)
+            }
+            return fetchedPrices
+          })
+          .catch(() => {
+            if (!cancelled) setPricesLoading(false)
+            return []
+          })
+
+        if (data.author) {
+          axios.get(`/api/books/${isbn}/author-books`, { params: { author: data.author } })
+            .then(({ data: d }) => { if (!cancelled) setAuthorBooks(d.books || []) })
             .catch(() => {})
-            .finally(() => setAuthorBooksLoading(false))
+            .finally(() => { if (!cancelled) setAuthorBooksLoading(false) })
         } else {
           setAuthorBooksLoading(false)
         }
+
+        // 리뷰는 가격 응답에서 얻는 yes24Link/kyoboLink가 필요해서 가격 조회 완료 후에 시작
+        pricesPromise.then((fetchedPrices) => {
+          if (cancelled) return
+          const yes24Link = fetchedPrices.find(p => p.platform === '예스24')?.link || ''
+          const kyoboLink = fetchedPrices.find(p => p.platform === '교보문고')?.link || ''
+          const params = new URLSearchParams({ title: data.title || '', yes24Link, kyoboLink }).toString()
+          return axios.get(`/api/books/${isbn}/reviews?${params}`)
+            .then(({ data: reviewData }) => { if (!cancelled) setReviews(reviewData.reviews || []) })
+            .catch(() => {})
+            .finally(() => { if (!cancelled) setReviewsLoading(false) })
+        })
       })
       .catch(err => {
         console.error(err)
-        setAuthorBooksLoading(false)
+        if (!cancelled) {
+          setLoading(false)
+          setPricesLoading(false)
+          setReviewsLoading(false)
+          setAuthorBooksLoading(false)
+        }
       })
-      .finally(() => {
-        setLoading(false)
-        setPricesLoading(false)
-        setReviewsLoading(false)
-      })
+
+    return () => { cancelled = true }
   }, [isbn])
 
   if (loading) return <DetailSkeleton />

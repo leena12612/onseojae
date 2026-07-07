@@ -46,7 +46,10 @@ router.get('/:isbn/stream', async (req, res) => {
   await Promise.all(
     Object.entries(grouped).map(async ([region, libs]) => {
       const results = await Promise.allSettled(
-        libs.map(lib => limit(() => scrapeOne(isbn, lib, { title, author })))
+        libs.map(lib =>
+          limit(() => scrapeOne(isbn, lib, { title, author }))
+            .finally(() => send('progress', {}))
+        )
       )
 
       const regionLibraries = results.map((r, i) =>

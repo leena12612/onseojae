@@ -280,7 +280,23 @@ async function getKyoboReviews(isbn, kyoboLink) {
 }
 
 // ─── 공개 API ─────────────────────────────────────────────────────────────────
-export async function getReviews(isbn, { title = '', yes24Link = '', kyoboLink = '' } = {}) {
+// 리뷰 스크래핑 + Claude 요약 생성은 몇 초씩 걸리고 리뷰 내용은 자주 바뀌지 않으므로
+// ISBN 단위로 결과를 캐싱해서, 같은 책을 다시 조회할 때는 즉시 응답한다.
+const reviewCache = new Map()
+const REVIEW_CACHE_TTL_MS = 12 * 60 * 60 * 1000 // 12시간
+
+export async function getReviews(isbn, options = {}) {
+  const cached = reviewCache.get(isbn)
+  if (cached && Date.now() - cached.timestamp < REVIEW_CACHE_TTL_MS) {
+    return cached.data
+  }
+
+  const result = await fetchReviews(isbn, options)
+  reviewCache.set(isbn, { data: result, timestamp: Date.now() })
+  return result
+}
+
+async function fetchReviews(isbn, { title = '', yes24Link = '', kyoboLink = '' } = {}) {
   if (process.env.USE_MOCK !== 'false') {
     await delay(400)
     return [
