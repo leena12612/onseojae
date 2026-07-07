@@ -92,7 +92,7 @@ export default function BookDetailPage() {
             </svg>
             홈으로
           </Link>
-          <ShareButton title={book?.title} />
+          <ShareButton />
         </div>
       </header>
 
@@ -189,18 +189,13 @@ export default function BookDetailPage() {
   )
 }
 
-function ShareButton({ title }) {
+function ShareButton() {
   const [copied, setCopied] = useState(false)
 
   const handleShare = async () => {
-    const url = window.location.href
-    if (navigator.share) {
-      await navigator.share({ title, url }).catch(() => {})
-    } else {
-      await navigator.clipboard.writeText(url)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    }
+    await navigator.clipboard.writeText(window.location.href)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
   }
 
   return (
