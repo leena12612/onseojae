@@ -217,9 +217,6 @@ export default function LibraryAvailability({ isbn, title, author }) {
             )}
           </div>
           <div className="flex items-center gap-2">
-            {loading && (
-              <span className="w-3 h-3 border-2 border-brand-400 border-t-transparent rounded-full animate-spin" />
-            )}
             <RegionFilter regions={allRegions} selected={selectedRegion} onChange={setSelectedRegion} />
             {!loading && (
               <button
