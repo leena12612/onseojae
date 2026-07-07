@@ -467,7 +467,7 @@ export default function EbooksPage() {
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            검색으로
+            홈으로
           </Link>
           <div className="flex-1" />
           <div className="flex-shrink-0 flex items-center gap-1.5 text-xs font-semibold text-brand-600 bg-brand-50 hover:bg-brand-100 transition-all px-3 py-1.5 rounded-full whitespace-nowrap">
