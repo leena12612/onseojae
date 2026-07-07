@@ -29,10 +29,10 @@ export default function RegionMultiSelect({ regions, selected, onChange, title }
         type="button"
         onClick={() => setOpen(v => !v)}
         title={title}
-        className="flex items-center gap-1 font-medium text-slate-700 cursor-pointer"
+        className="flex items-center gap-1 font-semibold cursor-pointer"
       >
         {label}
-        <svg className={`w-3 h-3 text-slate-400 transition-transform ${open ? 'rotate-180' : ''}`}
+        <svg className={`w-3 h-3 transition-transform ${open ? 'rotate-180' : ''}`}
           fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
