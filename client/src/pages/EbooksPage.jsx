@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import axios from 'axios'
+import { findMatchingBook } from '../utils/matchBook'
 
 const PAGE_SIZE = 20
 
@@ -141,7 +142,7 @@ function MillieCard({ book }) {
     const q = cleanTitle(book.title)
     try {
       const { data } = await axios.get('/api/books/search', { params: { q, page: 1 } })
-      const found = (data.books || []).find(b => b.isbn)
+      const found = findMatchingBook(data.books || [], q, book.author)
       if (found?.isbn) navigate(`/book/${found.isbn}`)
       else navigate(`/?q=${encodeURIComponent(q)}`)
     } catch {
@@ -329,7 +330,7 @@ function BookstoreCard({ book }) {
     const q = cleanTitle(book.title)
     try {
       const { data } = await axios.get('/api/books/search', { params: { q, page: 1 } })
-      const found = (data.books || []).find(b => b.isbn)
+      const found = findMatchingBook(data.books || [], q, book.author)
       if (found?.isbn) navigate(`/book/${found.isbn}`)
       else navigate(`/?q=${encodeURIComponent(q)}`)
     } catch {

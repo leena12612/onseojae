@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
+import { findMatchingBook } from '../utils/matchBook'
 
 const CATEGORIES = [
   { id: 'total',            label: '종합' },
@@ -26,10 +27,7 @@ function BookCard({ book, onSearch }) {
     const q = cleanTitle(book.title)
     try {
       const { data } = await axios.get('/api/books/search', { params: { q, page: 1 } })
-      const results = data.books || []
-      const qNorm = q.replace(/\s/g, '')
-      const found = results.find(b => b.isbn && b.title.replace(/\s/g, '').includes(qNorm))
-                 || results.find(b => b.isbn)
+      const found = findMatchingBook(data.books || [], q, book.author)
       if (found?.isbn) navigate(`/book/${found.isbn}`)
       else if (onSearch) onSearch(q)
       else navigate(`/?q=${encodeURIComponent(q)}`)
