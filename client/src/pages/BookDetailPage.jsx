@@ -193,7 +193,22 @@ function ShareButton() {
   const [copied, setCopied] = useState(false)
 
   const handleShare = async () => {
-    await navigator.clipboard.writeText(window.location.href)
+    const url = window.location.href
+
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(url)
+    } else {
+      // HTTP 등 비보안 컨텍스트에서는 navigator.clipboard가 아예 없으므로 옛날 방식으로 폴백
+      const textarea = document.createElement('textarea')
+      textarea.value = url
+      textarea.style.position = 'fixed'
+      textarea.style.opacity = '0'
+      document.body.appendChild(textarea)
+      textarea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textarea)
+    }
+
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
