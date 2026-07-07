@@ -2,6 +2,9 @@ import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import axios from 'axios'
 import { findMatchingBook, cleanAuthor } from '../utils/matchBook'
+import useRegionPreference from '../hooks/useRegionPreference'
+import RegionMultiSelect from '../components/RegionMultiSelect'
+import { REGIONS } from '../constants/regions'
 
 const PAGE_SIZE = 20
 
@@ -450,6 +453,7 @@ const TABS = [
 export default function EbooksPage() {
   const [searchParams] = useSearchParams()
   const [tab, setTab] = useState(searchParams.get('tab') || 'bookstore')
+  const [regions, setRegions] = useRegionPreference()
 
   return (
     <div className="min-h-screen bg-white">
@@ -465,6 +469,20 @@ export default function EbooksPage() {
             </svg>
             검색으로
           </Link>
+          <div className="flex-1" />
+          <div className="flex-shrink-0 flex items-center gap-1.5 text-xs font-semibold text-brand-600 bg-brand-50 hover:bg-brand-100 transition-all px-3 py-1.5 rounded-full whitespace-nowrap">
+            <svg className="w-3.5 h-3.5 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <RegionMultiSelect
+              regions={REGIONS}
+              selected={regions}
+              onChange={setRegions}
+              title="도서관 조회 지역"
+            />
+          </div>
         </div>
       </header>
 
