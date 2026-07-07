@@ -69,7 +69,10 @@ async function scrapeKyobo(library, title, author) {
   const result = findBestMatch($, 'ul.book_resultList li', title, author, ($el) => {
     return {
       titleText: $el.find('li.tit a').text().trim(),
+      // 저자 표기 뒤에 오디오북 낭독 서비스명("들음닷컴" 등)이 붙어 나오는 경우가 있어
+      // 오디오북 여부를 판단하는 데 방해되지 않도록 별도 뱃지로 감지한다
       authorText: $el.find('li.writer').text().trim(),
+      isAudio: $el.find('span.audio').length > 0,
       useText: $el.find('p.use').text().trim(),
       link: searchLink,
     }
@@ -151,6 +154,10 @@ function findBestMatch($, selector, title, author, extractor) {
   $(selector).each((_, el) => {
     const $el = $(el)
     const info = extractor($el)
+
+    // 오디오북은 종이책/전자책과 다른 상품이라 "대출가능"으로 취급하면 안 되므로 후보에서 제외
+    if (info.isAudio) return
+
     const authorScore = author ? similarity(info.authorText, author) : null
 
     // 저자 정보가 있는데 후보의 저자와 거의 겹치지 않으면 (짧은 제목이 우연히 다른 책 제목에
