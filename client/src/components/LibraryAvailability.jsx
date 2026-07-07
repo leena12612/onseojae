@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import StatusBadge from './StatusBadge'
 import RegionFilter from './RegionFilter'
 import useLibraryFavorites from '../hooks/useLibraryFavorites'
+import useRegionPreference from '../hooks/useRegionPreference'
 
 const PLATFORM_LABEL = {
   kyobo:    '교보',
@@ -131,6 +132,8 @@ export default function LibraryAvailability({ isbn, title, author }) {
   const [selectedRegion, setSelectedRegion] = useState('전체')
   const esRef = useRef(null)
   const { favorites, isFavorite, toggle: toggleFavorite } = useLibraryFavorites()
+  const [regionPref] = useRegionPreference()
+  const [scope, setScope] = useState(regionPref)
 
   const connect = useCallback(() => {
     if (!title) return
@@ -142,7 +145,11 @@ export default function LibraryAvailability({ isbn, title, author }) {
 
     if (esRef.current) esRef.current.close()
 
-    const params = new URLSearchParams({ title, ...(author && { author }) })
+    const params = new URLSearchParams({
+      title,
+      ...(author && { author }),
+      ...(scope.length > 0 && { region: scope.join(',') }),
+    })
     const es = new EventSource(`/api/libraries/${isbn}/stream?${params}`)
     esRef.current = es
 
@@ -169,12 +176,14 @@ export default function LibraryAvailability({ isbn, title, author }) {
       es.close()
     })
     es.onerror = () => { setLoading(false); es.close() }
-  }, [isbn, title, author])
+  }, [isbn, title, author, scope])
 
   useEffect(() => {
     connect()
     return () => esRef.current?.close()
   }, [connect])
+
+  const widenToNationwide = () => setScope([])
 
   const REGION_ORDER = ['서울', '인천', '대전 / 세종', '대구', '울산', '부산', '광주', '경기', '강원', '충북 / 충남', '전북 / 전남', '경북 / 경남', '제주']
   const regions = Object.keys(grouped).sort((a, b) => {
@@ -210,7 +219,7 @@ export default function LibraryAvailability({ isbn, title, author }) {
             <RegionFilter regions={allRegions} selected={selectedRegion} onChange={setSelectedRegion} />
             {!loading && (
               <button
-                onClick={connect}
+                onClick={() => connect()}
                 className="flex items-center gap-1 text-xs text-white bg-slate-800 hover:bg-slate-700 transition-colors px-2.5 py-1.5 rounded-lg font-medium"
               >
                 새로고침
@@ -218,6 +227,20 @@ export default function LibraryAvailability({ isbn, title, author }) {
             )}
           </div>
         </div>
+
+        {scope.length > 0 && (
+          <div className="flex items-center gap-2 mb-3">
+            <span className="text-xs text-slate-500 bg-slate-50 border border-slate-200 rounded-full px-2.5 py-1">
+              {scope.join(', ')} 지역만 조회 중
+            </span>
+            <button
+              onClick={widenToNationwide}
+              className="text-xs text-brand-500 hover:underline font-medium"
+            >
+              전국으로 넓혀보기
+            </button>
+          </div>
+        )}
 
         {/* 통계 pills */}
         {!loading && (

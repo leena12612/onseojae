@@ -15,7 +15,7 @@ const app = express()
 const PORT = process.env.PORT || 3001
 
 if (!isProd) {
-  app.use(cors({ origin: process.env.CLIENT_ORIGIN || 'http://localhost:3000' }))
+  app.use(cors({ origin: process.env.CLIENT_ORIGIN || 'http://localhost:5173' }))
 }
 app.use(express.json())
 

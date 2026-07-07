@@ -5,13 +5,21 @@ import { pLimit } from '../utils/pLimit.js'
 const router = Router()
 const CONCURRENCY = 40
 
+// region 메타데이터가 없는 도서관('기타')이 많아 지역 필터에서 통째로 누락되지 않도록 항상 포함
+function scopeToRegion(libraries, region) {
+  if (!region) return libraries
+  const selected = region.split(',').map(r => r.trim()).filter(Boolean)
+  if (selected.length === 0) return libraries
+  return libraries.filter(lib => selected.includes(lib.region) || lib.region === '기타')
+}
+
 /**
  * SSE 스트리밍
  * GET /api/libraries/:isbn/stream?title=...&author=...
  */
 router.get('/:isbn/stream', async (req, res) => {
   const { isbn } = req.params
-  const { title, author } = req.query
+  const { title, author, region } = req.query
 
   if (!title) return res.status(400).json({ error: 'title query param required' })
 
@@ -24,7 +32,7 @@ router.get('/:isbn/stream', async (req, res) => {
     if (!res.writableEnded) res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`)
   }
 
-  const libraries = getLibraryList()
+  const libraries = scopeToRegion(getLibraryList(), region)
   send('count', { total: libraries.length })
 
   // 지역별로 묶어서 병렬 스크래핑
@@ -65,11 +73,11 @@ router.get('/:isbn/stream', async (req, res) => {
  */
 router.get('/:isbn', async (req, res) => {
   const { isbn } = req.params
-  const { title, author } = req.query
+  const { title, author, region } = req.query
   if (!title) return res.status(400).json({ error: 'title query param required' })
 
   try {
-    const libraries = getLibraryList()
+    const libraries = scopeToRegion(getLibraryList(), region)
     const limit = pLimit(CONCURRENCY)
     const results = await Promise.allSettled(
       libraries.map(lib => limit(() => scrapeOne(isbn, lib, { title, author })))

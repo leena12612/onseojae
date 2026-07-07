@@ -5,6 +5,9 @@ import BookCard from "../components/BookCard";
 import BestsellerRanking from "../components/BestsellerRanking";
 import useRecentSearches from "../hooks/useRecentSearches";
 import useBookmarks from "../hooks/useBookmarks";
+import useRegionPreference from "../hooks/useRegionPreference";
+import RegionMultiSelect from "../components/RegionMultiSelect";
+import { REGIONS } from "../constants/regions";
 
 function TypewriterText({ text, speed = 120, className }) {
   const [displayed, setDisplayed] = useState("");
@@ -122,6 +125,7 @@ export default function SearchPage() {
   } = useRecentSearches();
   const { bookmarks, toggle: toggleBookmark, clearAll: clearBookmarks } = useBookmarks();
   const [popular, setPopular] = useState([]);
+  const [regions, setRegions] = useRegionPreference();
 
   useEffect(() => {
     axios
@@ -218,6 +222,19 @@ export default function SearchPage() {
             </div>
           )}
           {!searched && <div className="flex-1" />}
+          <div className="flex-shrink-0 flex items-center gap-1 text-xs text-slate-500 bg-slate-100 rounded-full pl-2.5 pr-1 py-1">
+            <svg className="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <RegionMultiSelect
+              regions={REGIONS}
+              selected={regions}
+              onChange={setRegions}
+              title="도서관 조회 지역"
+            />
+          </div>
           <Link
             to="/ebooks"
             className="flex-shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 transition-all px-3 py-1.5 rounded-full whitespace-nowrap"
