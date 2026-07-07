@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import axios from 'axios'
-import { findMatchingBook } from '../utils/matchBook'
+import { findMatchingBook, cleanAuthor } from '../utils/matchBook'
 
 const PAGE_SIZE = 20
 
@@ -140,13 +140,17 @@ function MillieCard({ book }) {
     if (searching) return
     setSearching(true)
     const q = cleanTitle(book.title)
+    const author = cleanAuthor(book.author)
+    // 제목만으로 검색하면 흔한 단어(예: "인생")는 결과가 너무 많아 첫 페이지에 진짜 책이
+    // 안 잡힐 수 있어서, 저자를 검색어에 같이 넣어 좁힌다.
+    const searchQuery = author ? `${q} ${author}` : q
     try {
-      const { data } = await axios.get('/api/books/search', { params: { q, page: 1 } })
-      const found = findMatchingBook(data.books || [], q, book.author)
+      const { data } = await axios.get('/api/books/search', { params: { q: searchQuery, page: 1 } })
+      const found = findMatchingBook(data.books || [], q, author)
       if (found?.isbn) navigate(`/book/${found.isbn}`)
-      else navigate(`/?q=${encodeURIComponent(q)}`)
+      else navigate(`/?q=${encodeURIComponent(searchQuery)}`)
     } catch {
-      navigate(`/?q=${encodeURIComponent(q)}`)
+      navigate(`/?q=${encodeURIComponent(searchQuery)}`)
     }
     finally { setSearching(false) }
   }
@@ -328,13 +332,17 @@ function BookstoreCard({ book }) {
     if (book.isbn) { navigate(`/book/${book.isbn}`); return }
     setSearching(true)
     const q = cleanTitle(book.title)
+    const author = cleanAuthor(book.author)
+    // 제목만으로 검색하면 흔한 단어(예: "인생")는 결과가 너무 많아 첫 페이지에 진짜 책이
+    // 안 잡힐 수 있어서, 저자를 검색어에 같이 넣어 좁힌다.
+    const searchQuery = author ? `${q} ${author}` : q
     try {
-      const { data } = await axios.get('/api/books/search', { params: { q, page: 1 } })
-      const found = findMatchingBook(data.books || [], q, book.author)
+      const { data } = await axios.get('/api/books/search', { params: { q: searchQuery, page: 1 } })
+      const found = findMatchingBook(data.books || [], q, author)
       if (found?.isbn) navigate(`/book/${found.isbn}`)
-      else navigate(`/?q=${encodeURIComponent(q)}`)
+      else navigate(`/?q=${encodeURIComponent(searchQuery)}`)
     } catch {
-      navigate(`/?q=${encodeURIComponent(q)}`)
+      navigate(`/?q=${encodeURIComponent(searchQuery)}`)
     } finally { setSearching(false) }
   }
 
