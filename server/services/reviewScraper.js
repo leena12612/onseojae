@@ -284,11 +284,13 @@ async function getKyoboReviews(isbn, kyoboLink) {
 // ISBN 단위로 결과를 캐싱해서, 같은 책을 다시 조회할 때는 즉시 응답한다.
 const reviewCache = new Map()
 const REVIEW_CACHE_TTL_MS = 12 * 60 * 60 * 1000 // 12시간
+const EMPTY_REVIEW_CACHE_TTL_MS = 60 * 1000 // 1분 — 스크래핑 실패/빈 결과는 짧게만 캐싱해서 금방 재시도되게 함
 
 export async function getReviews(isbn, options = {}) {
   const cached = reviewCache.get(isbn)
-  if (cached && Date.now() - cached.timestamp < REVIEW_CACHE_TTL_MS) {
-    return cached.data
+  if (cached) {
+    const ttl = cached.data.length ? REVIEW_CACHE_TTL_MS : EMPTY_REVIEW_CACHE_TTL_MS
+    if (Date.now() - cached.timestamp < ttl) return cached.data
   }
 
   const result = await fetchReviews(isbn, options)
