@@ -137,7 +137,7 @@ export default function LibraryAvailability({ isbn, title, author }) {
   const [regionPref] = useRegionPreference()
   const [scope, setScope] = useState(regionPref)
 
-  const connect = useCallback(() => {
+  const connect = useCallback((force = false) => {
     if (!title) return
     setGrouped({})
     setLoading(true)
@@ -151,6 +151,7 @@ export default function LibraryAvailability({ isbn, title, author }) {
       title,
       ...(author && { author }),
       ...(scope.length > 0 && { region: scope.join(',') }),
+      ...(force && { force: '1' }),
     })
     const es = new EventSource(`/api/libraries/${isbn}/stream?${params}`)
     esRef.current = es
@@ -220,7 +221,7 @@ export default function LibraryAvailability({ isbn, title, author }) {
             <RegionFilter regions={allRegions} selected={selectedRegion} onChange={setSelectedRegion} />
             {!loading && (
               <button
-                onClick={() => connect()}
+                onClick={() => connect(true)}
                 className="flex items-center gap-1 text-xs text-white bg-slate-800 hover:bg-slate-700 transition-colors px-2.5 py-1.5 rounded-lg font-medium"
               >
                 새로고침

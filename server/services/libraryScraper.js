@@ -34,12 +34,29 @@ export function getLibraryList() {
   return LIBRARIES
 }
 
+// 책 하나를 조회할 때마다 등록된 모든 도서관(200여 곳)을 매번 다시 스크래핑하면
+// 상대 사이트에 불필요한 부하를 준다. 같은 책+도서관 조합은 짧은 시간 내 재조회해도
+// 결과가 거의 바뀌지 않으므로 캐싱해서 요청 빈도를 줄인다.
+const libraryCache = new Map()
+const LIBRARY_CACHE_TTL_MS = 10 * 60 * 1000 // 10분
+
 /**
  * 단일 도서관 전자책 대출 현황 조회
  */
-export async function scrapeOne(_isbn, library, { title, author } = {}) {
+export async function scrapeOne(isbn, library, { title, author, force = false } = {}) {
   if (process.env.USE_MOCK !== 'false') return mockResult(library)
 
+  const cacheKey = `${isbn}:${library.id}`
+  const cached = libraryCache.get(cacheKey)
+  // force(사용자가 새로고침 버튼을 누른 경우)일 때는 캐시를 건너뛰고 진짜 실시간으로 다시 조회한다
+  if (!force && cached && Date.now() - cached.timestamp < LIBRARY_CACHE_TTL_MS) return cached.data
+
+  const result = await fetchOne(library, title, author)
+  libraryCache.set(cacheKey, { data: result, timestamp: Date.now() })
+  return result
+}
+
+async function fetchOne(library, title, author) {
   try {
     switch (library.platform) {
       case 'kyobo':    return await scrapeKyobo(library, title, author)

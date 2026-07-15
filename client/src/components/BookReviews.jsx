@@ -54,10 +54,7 @@ const PLATFORM_STAR_COLOR = {
   '교보문고': 'text-amber-400',
 }
 
-function ReviewItem({ review, platform }) {
-  const [expanded, setExpanded] = useState(false)
-  const LIMIT = 100
-  const isLong = (review.content?.length || 0) > LIMIT
+function ReviewItem({ review, platform, link }) {
   const rating = review.rating ?? (review.title ? KYOBO_RATING[review.title] : null)
   const starColor = PLATFORM_STAR_COLOR[platform] || 'text-amber-400'
 
@@ -78,14 +75,16 @@ function ReviewItem({ review, platform }) {
       </div>
       {review.content && (
         <p className="text-sm text-slate-600 leading-relaxed">
-          {expanded ? review.content : review.content.slice(0, LIMIT)}
-          {isLong && (
-            <button
-              onClick={() => setExpanded(v => !v)}
+          {review.content}
+          {review.truncated && link && (
+            <a
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
               className="ml-1 text-brand-500 hover:underline"
             >
-              {expanded ? ' 접기' : '...더보기'}
-            </button>
+              ...원문 보기
+            </a>
           )}
         </p>
       )}
@@ -170,7 +169,7 @@ function PlatformReviews({ item }) {
       {open && hasReviews && (
         <div className="px-5 pb-2">
           {item.reviews.map((r, i) => (
-            <ReviewItem key={i} review={r} platform={item.platform} />
+            <ReviewItem key={i} review={r} platform={item.platform} link={item.link} />
           ))}
         </div>
       )}

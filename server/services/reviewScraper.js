@@ -332,13 +332,30 @@ async function fetchReviews(isbn, { title = '', yes24Link = '', kyoboLink = '' }
     .map(r => r.status === 'fulfilled' ? r.value : null)
     .filter(Boolean)
 
-  // Claude 종합 요약 생성
+  // Claude 종합 요약 생성 (원문 전체를 넘겨야 요약 품질이 나오므로 잘라내기 전에 실행)
   const claudeSummary = await generateClaudeSummary(title, results)
   if (claudeSummary) {
     results.unshift({ platform: 'Claude', aiSummary: claudeSummary, reviews: [] })
   }
 
-  return results
+  return truncateReviews(results)
+}
+
+// 리뷰 원문을 그대로 재게시하면 저작권 이슈가 있으므로, 클라이언트로 내려줄 때는
+// 짧은 발췌만 남기고 나머지는 원문 링크로 유도한다.
+const REVIEW_EXCERPT_LIMIT = 200
+
+function truncateReviews(platformResults) {
+  return platformResults.map(p => {
+    if (!p.reviews?.length) return p
+    return {
+      ...p,
+      reviews: p.reviews.map(r => {
+        if (!r.content || r.content.length <= REVIEW_EXCERPT_LIMIT) return r
+        return { ...r, content: r.content.slice(0, REVIEW_EXCERPT_LIMIT).trim(), truncated: true }
+      }),
+    }
+  })
 }
 
 // ─── Claude 종합 리뷰 요약 ─────────────────────────────────────────────────────

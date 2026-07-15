@@ -18,7 +18,8 @@ function scopeToRegion(libraries, region) {
  */
 router.get('/:isbn/stream', async (req, res) => {
   const { isbn } = req.params
-  const { title, author, region } = req.query
+  const { title, author, region, force } = req.query
+  const forceRefresh = force === 'true' || force === '1'
 
   if (!title) return res.status(400).json({ error: 'title query param required' })
 
@@ -47,7 +48,7 @@ router.get('/:isbn/stream', async (req, res) => {
     Object.entries(grouped).map(async ([region, libs]) => {
       const results = await Promise.allSettled(
         libs.map(lib =>
-          limit(() => scrapeOne(isbn, lib, { title, author }))
+          limit(() => scrapeOne(isbn, lib, { title, author, force: forceRefresh }))
             .finally(() => send('progress', {}))
         )
       )
@@ -75,14 +76,15 @@ router.get('/:isbn/stream', async (req, res) => {
  */
 router.get('/:isbn', async (req, res) => {
   const { isbn } = req.params
-  const { title, author, region } = req.query
+  const { title, author, region, force } = req.query
+  const forceRefresh = force === 'true' || force === '1'
   if (!title) return res.status(400).json({ error: 'title query param required' })
 
   try {
     const libraries = scopeToRegion(getLibraryList(), region)
     const limit = pLimit(CONCURRENCY)
     const results = await Promise.allSettled(
-      libraries.map(lib => limit(() => scrapeOne(isbn, lib, { title, author })))
+      libraries.map(lib => limit(() => scrapeOne(isbn, lib, { title, author, force: forceRefresh })))
     )
 
     const flat = results.map((r, i) =>

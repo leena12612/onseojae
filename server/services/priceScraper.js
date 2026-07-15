@@ -177,7 +177,22 @@ async function scrapeKyobo(isbn, title) {
 }
 
 // ─── 공개 API ─────────────────────────────────────────────────────────────────
+// 가격 조회할 때마다 예스24/교보문고를 다시 스크래핑하면 상대 사이트에 불필요한
+// 부하를 준다. 가격은 짧은 시간 내에는 거의 바뀌지 않으므로 캐싱해서 요청을 줄인다.
+const priceCache = new Map()
+const PRICE_CACHE_TTL_MS = 10 * 60 * 1000 // 10분
+
 export async function getPrices(isbn, title = '') {
+  const cacheKey = `${isbn}:${title}`
+  const cached = priceCache.get(cacheKey)
+  if (cached && Date.now() - cached.timestamp < PRICE_CACHE_TTL_MS) return cached.data
+
+  const result = await fetchPrices(isbn, title)
+  priceCache.set(cacheKey, { data: result, timestamp: Date.now() })
+  return result
+}
+
+async function fetchPrices(isbn, title) {
   if (process.env.USE_MOCK !== 'false') {
     await delay(500)
     const mock = [
