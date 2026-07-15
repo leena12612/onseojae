@@ -7,7 +7,7 @@ const LIBRARIES = createRequire(import.meta.url)('../data/libraries.json')
 
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0'
 
-async function fetchHtml(url, params, { retries = 1 } = {}) {
+async function fetchHtml(url, params, { retries = 1, signal } = {}) {
   for (let attempt = 0; ; attempt++) {
     try {
       const res = await axios.get(url, {
@@ -15,6 +15,7 @@ async function fetchHtml(url, params, { retries = 1 } = {}) {
         headers: { 'User-Agent': UA },
         timeout: 10000,
         responseType: 'arraybuffer',
+        signal,
       })
       const buf = Buffer.from(res.data)
       if (buf.length === 0) return ''
@@ -23,6 +24,7 @@ async function fetchHtml(url, params, { retries = 1 } = {}) {
       const charset = charsetMatch ? charsetMatch[1] : 'utf-8'
       return iconv.decode(buf, charset)
     } catch (err) {
+      if (axios.isCancel(err) || signal?.aborted) throw err
       const isTimeout = err.code === 'ECONNABORTED' || /timeout/i.test(err.message)
       if (attempt >= retries || isTimeout) throw err
       await delay(300)
@@ -43,7 +45,7 @@ const LIBRARY_CACHE_TTL_MS = 10 * 60 * 1000 // 10분
 /**
  * 단일 도서관 전자책 대출 현황 조회
  */
-export async function scrapeOne(isbn, library, { title, author, force = false } = {}) {
+export async function scrapeOne(isbn, library, { title, author, force = false, signal } = {}) {
   if (process.env.USE_MOCK !== 'false') return mockResult(library)
 
   const cacheKey = `${isbn}:${library.id}`
@@ -51,17 +53,18 @@ export async function scrapeOne(isbn, library, { title, author, force = false } 
   // force(사용자가 새로고침 버튼을 누른 경우)일 때는 캐시를 건너뛰고 진짜 실시간으로 다시 조회한다
   if (!force && cached && Date.now() - cached.timestamp < LIBRARY_CACHE_TTL_MS) return cached.data
 
-  const result = await fetchOne(library, title, author)
-  libraryCache.set(cacheKey, { data: result, timestamp: Date.now() })
+  const result = await fetchOne(library, title, author, signal)
+  // 클라이언트가 연결을 끊어서 취소된 결과는 진짜 상태가 아니므로 캐싱하지 않는다
+  if (!signal?.aborted) libraryCache.set(cacheKey, { data: result, timestamp: Date.now() })
   return result
 }
 
-async function fetchOne(library, title, author) {
+async function fetchOne(library, title, author, signal) {
   try {
     switch (library.platform) {
-      case 'kyobo':    return await scrapeKyobo(library, title, author)
-      case 'kyobo_t3': return await scrapeKyoboT3(library, title, author)
-      case 'yes24':    return await scrapeYes24(library, title, author)
+      case 'kyobo':    return await scrapeKyobo(library, title, author, signal)
+      case 'kyobo_t3': return await scrapeKyoboT3(library, title, author, signal)
+      case 'yes24':    return await scrapeYes24(library, title, author, signal)
       default:         return { ...library, status: 'unknown' }
     }
   } catch (err) {
@@ -73,13 +76,13 @@ async function fetchOne(library, title, author) {
 // URL 패턴: {baseUrl}/elibrary-front/search/searchList.ink?schTxt=제목&schClst=ctts
 // 대출 정보: <p class="use">[ 대출 : <strong>0/2</strong> 예약 : <strong>0</strong> ]</p>
 
-async function scrapeKyobo(library, title, author) {
+async function scrapeKyobo(library, title, author, signal) {
   const searchPath = library.searchPath ?? '/elibrary-front/search/searchList.ink'
   const searchQuery = title.replace(/\s*[(\[:].*/, '').trim() || title
   const searchParams = { schTxt: searchQuery, schClst: 'all', schDvsn: '000', orderByKey: '' }
   const searchLink = `${library.baseUrl}${searchPath}?schClst=all&schDvsn=000&orderByKey=&schTxt=${encodeURIComponent(searchQuery)}`
 
-  const html = await fetchHtml(`${library.baseUrl}${searchPath}`, searchParams)
+  const html = await fetchHtml(`${library.baseUrl}${searchPath}`, searchParams, { signal })
 
   const $ = cheerio.load(html)
 
@@ -108,9 +111,9 @@ async function scrapeKyobo(library, title, author) {
 // URL 패턴: {baseUrl}/Kyobo_T3/Content/Content_Search.asp?total_search_keyword=제목
 // 대출 정보: .service .loan .num → "1/1" (대출중/보유), .service .reserv .num → 예약수
 
-async function scrapeKyoboT3(library, title, author) {
+async function scrapeKyoboT3(library, title, author, signal) {
   const searchQuery = title.replace(/\s*[(\[:].*/, '').trim() || title
-  const html = await fetchHtml(`${library.baseUrl}/Kyobo_T3/Content/Content_Search.asp`, { total_search_keyword: searchQuery, search_type: '1,2' })
+  const html = await fetchHtml(`${library.baseUrl}/Kyobo_T3/Content/Content_Search.asp`, { total_search_keyword: searchQuery, search_type: '1,2' }, { signal })
 
   const $ = cheerio.load(html)
   const { text: result } = findBestMatch($, '#list_books ul.books_wrap li', title, author, ($el) => {
@@ -140,9 +143,9 @@ async function scrapeKyoboT3(library, title, author) {
 // URL 패턴: {baseUrl}/search/?srch_order=title&src_key=제목
 // 대출 정보: .stat ul li strong (순서: 보유 / 대출 / 예약)
 
-async function scrapeYes24(library, title, author) {
+async function scrapeYes24(library, title, author, signal) {
   const searchQuery = title.replace(/\s*[(\[:].*/, '').trim() || title
-  const html = await fetchHtml(`${library.baseUrl}/search/`, { srch_order: 'title', src_key: searchQuery })
+  const html = await fetchHtml(`${library.baseUrl}/search/`, { srch_order: 'title', src_key: searchQuery }, { signal })
 
   const $ = cheerio.load(html)
   const { text: result } = findBestMatch($, '.ebook-list .bx', title, author, ($el) => {

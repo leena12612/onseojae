@@ -38,7 +38,7 @@ function LibraryRow({ library, isFavorite, onToggleFavorite }) {
     <div className="flex items-center justify-between py-2.5 px-5 hover:bg-slate-50/80 transition-colors group">
       <div className="flex items-center gap-2 flex-1 min-w-0 mr-3">
         <button
-          onClick={() => onToggleFavorite(library.name)}
+          onClick={() => onToggleFavorite(library.id || library.name)}
           className="flex-shrink-0 focus:outline-none"
           title={isFavorite ? '즐겨찾기 해제' : '즐겨찾기'}
         >
@@ -115,7 +115,7 @@ function RegionAccordion({ region, libraries, availableCount, totalCount, isFavo
             <LibraryRow
               key={`${lib.id || lib.name}-${i}`}
               library={lib}
-              isFavorite={isFavorite(lib.name)}
+              isFavorite={isFavorite(lib.id || lib.name)}
               onToggleFavorite={onToggleFavorite}
             />
           ))}
@@ -260,7 +260,7 @@ export default function LibraryAvailability({ isbn, title, author }) {
       {/* 바디 */}
       {loading && totalLibraries === 0 ? (
         <LibraryListSkeleton />
-      ) : visibleRegions.length === 0 ? (
+      ) : !loading && visibleRegions.length === 0 ? (
         <div className="py-12 text-center text-slate-400 text-sm">
           <p>소장 정보가 없습니다</p>
         </div>
@@ -269,7 +269,7 @@ export default function LibraryAvailability({ isbn, title, author }) {
           {/* 즐겨찾는 도서관 */}
           {favorites.length > 0 && (() => {
             const allLibs = Object.values(grouped).flat()
-            const favLibs = allLibs.filter(l => favorites.includes(l.name))
+            const favLibs = allLibs.filter(l => favorites.includes(l.id || l.name))
             if (!favLibs.length) return null
             return (
               <div className="border-b border-slate-100">

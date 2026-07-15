@@ -32,6 +32,11 @@ router.get('/:isbn/stream', async (req, res) => {
     if (!res.writableEnded) res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`)
   }
 
+  // 클라이언트가 연결을 끊으면(필터 변경, 페이지 이탈 등) 이미 시작된 스크래핑도 같이 중단해서
+  // 버려질 요청 때문에 상대 도서관 사이트에 불필요한 부하를 주지 않게 한다.
+  const controller = new AbortController()
+  req.on('close', () => controller.abort())
+
   const libraries = scopeToRegion(getLibraryList(), region)
   send('count', { total: libraries.length })
 
@@ -48,7 +53,7 @@ router.get('/:isbn/stream', async (req, res) => {
     Object.entries(grouped).map(async ([region, libs]) => {
       const results = await Promise.allSettled(
         libs.map(lib =>
-          limit(() => scrapeOne(isbn, lib, { title, author, force: forceRefresh }))
+          limit(() => scrapeOne(isbn, lib, { title, author, force: forceRefresh, signal: controller.signal }))
             .finally(() => send('progress', {}))
         )
       )
@@ -80,11 +85,14 @@ router.get('/:isbn', async (req, res) => {
   const forceRefresh = force === 'true' || force === '1'
   if (!title) return res.status(400).json({ error: 'title query param required' })
 
+  const controller = new AbortController()
+  req.on('close', () => controller.abort())
+
   try {
     const libraries = scopeToRegion(getLibraryList(), region)
     const limit = pLimit(CONCURRENCY)
     const results = await Promise.allSettled(
-      libraries.map(lib => limit(() => scrapeOne(isbn, lib, { title, author, force: forceRefresh })))
+      libraries.map(lib => limit(() => scrapeOne(isbn, lib, { title, author, force: forceRefresh, signal: controller.signal })))
     )
 
     const flat = results.map((r, i) =>
