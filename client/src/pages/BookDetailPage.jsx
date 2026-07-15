@@ -178,14 +178,14 @@ export default function BookDetailPage() {
             {authorBooksLoading ? (
               <div className="bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/[0.06] p-5">
                 <div className="skeleton h-4 w-28 mb-3" />
-                <div className="grid grid-cols-4 sm:grid-cols-3 gap-2">
+                <div className="grid grid-cols-4 sm:grid-cols-3 gap-x-3 gap-y-4">
                   {[...Array(6)].map((_, i) => <div key={i} className="skeleton w-full aspect-[2/3] rounded-lg" />)}
                 </div>
               </div>
             ) : authorBooks.length > 0 && (
               <div className="bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/[0.06] p-5">
                 <h2 className="font-semibold text-slate-800 mb-3">같은 작가의 다른 책</h2>
-                <div className="grid grid-cols-4 sm:grid-cols-3 gap-2">
+                <div className="grid grid-cols-4 sm:grid-cols-3 gap-x-3 gap-y-4">
                   {authorBooks.map(b => (
                     <button key={b.isbn} onClick={() => navigate(`/book/${b.isbn}`)}
                       className="flex flex-col text-left group">
@@ -193,7 +193,7 @@ export default function BookDetailPage() {
                         <img src={b.coverUrl} alt={b.title} className="w-full h-full object-cover"
                           onError={e => { e.currentTarget.style.display = 'none' }} />
                       </div>
-                      <p className="text-xs text-slate-700 font-medium line-clamp-2 leading-snug">{b.title}</p>
+                      <p className="text-sm text-slate-700 font-medium line-clamp-2 leading-snug">{b.title}</p>
                     </button>
                   ))}
                 </div>
@@ -318,7 +318,7 @@ function DetailSkeleton() {
             </div>
             <div className="bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/[0.06] p-5">
               <div className="skeleton h-4 w-28 mb-3" />
-              <div className="grid grid-cols-4 sm:grid-cols-3 gap-2">
+              <div className="grid grid-cols-4 sm:grid-cols-3 gap-x-3 gap-y-4">
                 {[...Array(6)].map((_, i) => <div key={i} className="skeleton w-full aspect-[2/3] rounded-lg" />)}
               </div>
             </div>

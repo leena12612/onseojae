@@ -371,7 +371,7 @@ export default function SearchPage() {
                         onError={(e) => { e.currentTarget.style.display = "none" }}
                       />
                     </div>
-                    <p className="text-xs font-medium text-slate-700 line-clamp-2 leading-snug">{book.title}</p>
+                    <p className="text-sm font-medium text-slate-700 line-clamp-2 leading-snug">{book.title}</p>
                     <p className="text-xs text-slate-400 truncate">{book.author}</p>
                   </button>
                 </div>

@@ -122,7 +122,7 @@ export default function BestsellerRanking({ onSearch }) {
         ))}
       </div>
 
-      <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
+      <div className="grid grid-cols-3 sm:grid-cols-5 gap-x-6 gap-y-9">
         {loading
           ? Array.from({ length: INITIAL }).map((_, i) => <SkeletonCard key={i} />)
           : visible.map((book, i) => <BookCard key={`${book.rank}-${i}`} book={book} onSearch={onSearch} />)

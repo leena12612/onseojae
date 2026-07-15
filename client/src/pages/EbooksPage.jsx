@@ -111,7 +111,7 @@ function LibraryTab() {
         ))}
       </div>
 
-      <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
+      <div className="grid grid-cols-3 sm:grid-cols-5 gap-x-6 gap-y-9">
         {loading
           ? Array.from({ length: 20 }).map((_, i) => <SkeletonCard key={i} />)
           : books.map(b => <LibraryCard key={`${b.isbn}-${b.rank}`} book={b} />)
@@ -280,7 +280,7 @@ function MillieTab() {
 
       {error && <EmptyState msg="밀리의서재 데이터를 불러올 수 없습니다" />}
       {!error && (
-        <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
+        <div className="grid grid-cols-3 sm:grid-cols-5 gap-x-6 gap-y-9">
           {loading
             ? Array.from({ length: 20 }).map((_, i) => <SkeletonCard key={i} />)
             : books.map(b => <MillieCard key={`${b.rank}-${b.title}`} book={b} />)
@@ -430,7 +430,7 @@ function BookstoreTab() {
 
       {error && <EmptyState msg="서점 베스트 데이터를 불러올 수 없습니다" />}
       {!error && (
-        <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
+        <div className="grid grid-cols-3 sm:grid-cols-5 gap-x-6 gap-y-9">
           {loading
             ? Array.from({ length: 20 }).map((_, i) => <SkeletonCard key={i} />)
             : books.map(b => <BookstoreCard key={`${b.rank}-${b.title}`} book={b} />)

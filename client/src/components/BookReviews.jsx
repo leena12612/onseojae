@@ -77,7 +77,7 @@ function ReviewItem({ review, platform }) {
         </div>
       </div>
       {review.content && (
-        <p className="text-xs text-slate-600 leading-relaxed">
+        <p className="text-sm text-slate-600 leading-relaxed">
           {expanded ? review.content : review.content.slice(0, LIMIT)}
           {isLong && (
             <button
@@ -89,7 +89,7 @@ function ReviewItem({ review, platform }) {
           )}
         </p>
       )}
-      <p className="text-xs text-slate-400 mt-1">{review.author}</p>
+      <p className="text-xs text-slate-400 mt-1.5">{review.author}</p>
     </div>
   )
 }
@@ -115,7 +115,7 @@ function AiSummaryCard({ platform, text }) {
         </span>
       </div>
       {body.map((line, i) => (
-        <p key={i} className="text-xs text-slate-700 leading-relaxed mb-1">{line}</p>
+        <p key={i} className="text-sm text-slate-700 leading-relaxed mb-1">{line}</p>
       ))}
       {tags.length > 0 && (
         <p className="text-xs text-violet-500 mt-2">{tags.join(' ')}</p>
