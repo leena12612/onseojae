@@ -136,6 +136,7 @@ export default function LibraryAvailability({ isbn, title, author }) {
   const { favorites, isFavorite, toggle: toggleFavorite } = useLibraryFavorites()
   const [regionPref] = useRegionPreference()
   const [scope, setScope] = useState(regionPref)
+  const scopeOverridden = scope.length !== regionPref.length || scope.some(r => !regionPref.includes(r))
 
   const connect = useCallback((force = false) => {
     if (!title) return
@@ -244,7 +245,7 @@ export default function LibraryAvailability({ isbn, title, author }) {
               title="도서관 조회 지역"
             />
           </div>
-          {scope.length > 0 && (
+          {scopeOverridden && (
             <span className="text-xs text-slate-400">이 책에서만 적용돼요</span>
           )}
         </div>
