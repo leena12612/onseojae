@@ -187,16 +187,18 @@ async function getKyoboReviews(isbn, kyoboLink) {
   if (!kyoboLink) return null
 
   // kyoboLink: https://product.kyobobook.co.kr/detail/S000210530586
+  // 사용자가 넘긴 kyoboLink를 그대로 요청하면 임의 URL로 서버가 요청을 대신 보내는
+  // SSRF가 되므로, pid만 추출해서 항상 교보문고 고정 도메인으로 URL을 재조립한다.
   const pid = kyoboLink.match(/\/detail\/(S\d+)/)?.[1]
   if (!pid) return null
 
-  const link = kyoboLink
+  const link = `https://product.kyobobook.co.kr/detail/${pid}`
 
   const browserHeaders = {
     'User-Agent': UA,
     'Accept': 'application/json, text/plain, */*',
     'Accept-Language': 'ko-KR,ko;q=0.9',
-    'Referer': kyoboLink,
+    'Referer': link,
     'sec-ch-ua': '"Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"',
     'sec-ch-ua-mobile': '?0',
     'sec-ch-ua-platform': '"Windows"',
@@ -210,7 +212,7 @@ async function getKyoboReviews(isbn, kyoboLink) {
   let totalCount    = null
   let aiSummary     = null
   try {
-    const html = await fetchHtml(kyoboLink, {}, {
+    const html = await fetchHtml(link, {}, {
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
       'sec-ch-ua': '"Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"',
       'sec-ch-ua-mobile': '?0',
