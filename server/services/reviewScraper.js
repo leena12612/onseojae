@@ -260,7 +260,7 @@ async function getKyoboReviews(isbn, kyoboLink) {
       reviews.push({
         title:   r.revwEmtnKywrName || '',   // 감정 키워드 (최고예요, 추천해요 등)
         content,
-        author:  r.mmbrId || '',
+        author:  maskId(r.mmbrId || ''),
         date:    (r.cretDttm || '').slice(0, 10),
         rating:  null,                        // 교보는 별점 대신 감정 키워드 사용 → 별 미표시
       })
