@@ -40,7 +40,7 @@ export function getLibraryList() {
 // 상대 사이트에 불필요한 부하를 준다. 같은 책+도서관 조합은 짧은 시간 내 재조회해도
 // 결과가 거의 바뀌지 않으므로 캐싱해서 요청 빈도를 줄인다.
 const libraryCache = new Map()
-const LIBRARY_CACHE_TTL_MS = 10 * 60 * 1000 // 10분
+const LIBRARY_CACHE_TTL_MS = 3 * 60 * 1000 // 3분
 
 /**
  * 단일 도서관 전자책 대출 현황 조회
