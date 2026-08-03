@@ -72,6 +72,20 @@ async function fetchOne(library, title, author, signal) {
   }
 }
 
+// 검색 페이지가 일시적으로 빈 결과를 반환하는 경우(상대 서버 순간 장애, 네트워크 이슈 등)를
+// 대비해, 기대되는 요소가 하나도 안 잡히면 짧게 대기 후 한 번만 더 확인해본다.
+// 이미 목록이 있는데 찾는 책이 없는 "진짜 미소장"은 재시도하지 않으므로 대다수 조회 속도엔 영향 없다.
+async function fetchHtmlRetryIfEmpty(url, params, selector, { signal } = {}) {
+  const html = await fetchHtml(url, params, { signal })
+  const $ = cheerio.load(html)
+  if ($(selector).length > 0) return $
+
+  await delay(500)
+  const retryHtml = await fetchHtml(url, params, { signal })
+  const $retry = cheerio.load(retryHtml)
+  return $retry(selector).length > 0 ? $retry : $
+}
+
 // ─── 교보 전자도서관 플랫폼 ────────────────────────────────────────────────────
 // URL 패턴: {baseUrl}/elibrary-front/search/searchList.ink?schTxt=제목&schClst=ctts
 // 대출 정보: <p class="use">[ 대출 : <strong>0/2</strong> 예약 : <strong>0</strong> ]</p>
@@ -82,9 +96,7 @@ async function scrapeKyobo(library, title, author, signal) {
   const searchParams = { schTxt: searchQuery, schClst: 'all', schDvsn: '000', orderByKey: '' }
   const searchLink = `${library.baseUrl}${searchPath}?schClst=all&schDvsn=000&orderByKey=&schTxt=${encodeURIComponent(searchQuery)}`
 
-  const html = await fetchHtml(`${library.baseUrl}${searchPath}`, searchParams, { signal })
-
-  const $ = cheerio.load(html)
+  const $ = await fetchHtmlRetryIfEmpty(`${library.baseUrl}${searchPath}`, searchParams, 'ul.book_resultList li', { signal })
 
   const { text: result, audio: audioResult } = findBestMatch($, 'ul.book_resultList li', title, author, ($el) => {
     return {
@@ -113,9 +125,8 @@ async function scrapeKyobo(library, title, author, signal) {
 
 async function scrapeKyoboT3(library, title, author, signal) {
   const searchQuery = title.replace(/\s*[(\[:].*/, '').trim() || title
-  const html = await fetchHtml(`${library.baseUrl}/Kyobo_T3/Content/Content_Search.asp`, { total_search_keyword: searchQuery, search_type: '1,2' }, { signal })
+  const $ = await fetchHtmlRetryIfEmpty(`${library.baseUrl}/Kyobo_T3/Content/Content_Search.asp`, { total_search_keyword: searchQuery, search_type: '1,2' }, '#list_books ul.books_wrap li', { signal })
 
-  const $ = cheerio.load(html)
   const { text: result } = findBestMatch($, '#list_books ul.books_wrap li', title, author, ($el) => {
     const loanParts = $el.find('.service .loan .num').text().trim().split('/')
     const borrowed  = parseInt(loanParts[0]) || 0
@@ -145,9 +156,8 @@ async function scrapeKyoboT3(library, title, author, signal) {
 
 async function scrapeYes24(library, title, author, signal) {
   const searchQuery = title.replace(/\s*[(\[:].*/, '').trim() || title
-  const html = await fetchHtml(`${library.baseUrl}/search/`, { srch_order: 'title', src_key: searchQuery }, { signal })
+  const $ = await fetchHtmlRetryIfEmpty(`${library.baseUrl}/search/`, { srch_order: 'title', src_key: searchQuery }, '.ebook-list .bx', { signal })
 
-  const $ = cheerio.load(html)
   const { text: result } = findBestMatch($, '.ebook-list .bx', title, author, ($el) => {
     const stats = $el.find('.stat ul li strong')
     return {
@@ -173,6 +183,11 @@ async function scrapeYes24(library, title, author, signal) {
 // 오디오북은 종이책/전자책과 다른 상품이라 "대출가능"으로 취급하면 안 되지만,
 // 아예 숨기지는 않고 별도로 추적해서 "오디오북으로는 있다"고 알려줄 수 있게 한다.
 function findBestMatch($, selector, title, author, extractor) {
+  // 알라딘 등에서 받아온 저자명엔 "(지은이)", "(옮긴이)" 같은 역할 표기가 붙어 있는데,
+  // 도서관 사이트의 저자 필드는 역할 표기 없이 이름만(혹은 출판사·날짜가 구분자 없이 붙어) 나오는
+  // 경우가 많아 원문 그대로 비교하면 진짜 일치하는 책도 유사도가 낮게 나와 걸러진다.
+  const cleanAuthor = author ? author.replace(/\([^)]*\)/g, '').trim() : author
+
   let bestText = null
   let bestTextScore = 0
   let bestAudio = null
@@ -181,13 +196,13 @@ function findBestMatch($, selector, title, author, extractor) {
   $(selector).each((_, el) => {
     const $el = $(el)
     const info = extractor($el)
-    const authorScore = author ? similarity(info.authorText, author) : null
+    const authorScore = cleanAuthor ? similarity(info.authorText, cleanAuthor) : null
 
     // 저자 정보가 있는데 후보의 저자와 거의 겹치지 않으면 (짧은 제목이 우연히 다른 책 제목에
     // 부분 문자열로 포함되는 경우 등) 오탐이므로 후보에서 제외
-    if (author && authorScore < 0.3) return
+    if (cleanAuthor && authorScore < 0.3) return
 
-    const score = similarity(info.titleText, title) + (author ? authorScore * 0.3 : 0)
+    const score = similarity(info.titleText, title) + (cleanAuthor ? authorScore * 0.3 : 0)
 
     if (info.isAudio) {
       if (score > bestAudioScore) { bestAudioScore = score; bestAudio = info }

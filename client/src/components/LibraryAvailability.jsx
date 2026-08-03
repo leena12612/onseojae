@@ -251,8 +251,16 @@ export default function LibraryAvailability({ isbn, title, author }) {
         </div>
 
         {loading && (
-          <div className="mt-3 h-1 bg-slate-100 rounded-full overflow-hidden">
-            <div className="h-full bg-brand-400 rounded-full animate-pulse w-full" />
+          <div className="mt-3">
+            <div className="h-1 bg-slate-100 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-brand-400 rounded-full transition-[width] duration-300 ease-out"
+                style={{ width: total > 0 ? `${Math.min(100, (checkedCount / total) * 100)}%` : '4%' }}
+              />
+            </div>
+            <div className="mt-1.5 text-xs text-slate-400">
+              {total > 0 ? `${checkedCount} / ${total}곳 조회 중...` : '조회 중...'}
+            </div>
           </div>
         )}
       </div>
@@ -311,12 +319,6 @@ export default function LibraryAvailability({ isbn, title, author }) {
               />
             )
           })}
-          {loading && checkedCount > 0 && (
-            <div className="px-5 py-3 flex items-center gap-2 text-xs text-slate-400 border-t border-slate-50">
-              <span className="w-3 h-3 border-2 border-brand-300 border-t-transparent rounded-full animate-spin" />
-              {total > 0 ? `${checkedCount} / ${total}곳 조회 중...` : '조회 중...'}
-            </div>
-          )}
         </div>
       )}
     </div>
