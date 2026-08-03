@@ -149,7 +149,7 @@ function MillieCard({ book }) {
     const searchQuery = author ? `${q} ${author}` : q
     try {
       const { data } = await axios.get('/api/books/search', { params: { q: searchQuery, page: 1 } })
-      const found = findMatchingBook(data.books || [], q, author)
+      const found = findMatchingBook(data.books || [], q, book.author)
       if (found?.isbn) navigate(`/book/${found.isbn}`)
       else navigate(`/?q=${encodeURIComponent(searchQuery)}`)
     } catch {
@@ -332,7 +332,6 @@ function BookstoreCard({ book }) {
 
   const handleClick = async () => {
     if (searching) return
-    if (book.isbn) { navigate(`/book/${book.isbn}`); return }
     setSearching(true)
     const q = cleanTitle(book.title)
     const author = cleanAuthor(book.author)
@@ -341,7 +340,7 @@ function BookstoreCard({ book }) {
     const searchQuery = author ? `${q} ${author}` : q
     try {
       const { data } = await axios.get('/api/books/search', { params: { q: searchQuery, page: 1 } })
-      const found = findMatchingBook(data.books || [], q, author)
+      const found = findMatchingBook(data.books || [], q, book.author)
       if (found?.isbn) navigate(`/book/${found.isbn}`)
       else navigate(`/?q=${encodeURIComponent(searchQuery)}`)
     } catch {

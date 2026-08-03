@@ -31,7 +31,7 @@ function BookCard({ book, onSearch }) {
     const searchQuery = author ? `${q} ${author}` : q
     try {
       const { data } = await axios.get('/api/books/search', { params: { q: searchQuery, page: 1 } })
-      const found = findMatchingBook(data.books || [], q, author)
+      const found = findMatchingBook(data.books || [], q, book.author)
       if (found?.isbn) navigate(`/book/${found.isbn}`)
       else if (onSearch) onSearch(searchQuery)
       else navigate(`/?q=${encodeURIComponent(searchQuery)}`)
