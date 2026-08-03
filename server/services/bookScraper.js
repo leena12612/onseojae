@@ -55,6 +55,21 @@ async function searchBooksAladin(query, page = 1) {
 
   const ttbKey = process.env.ALADIN_TTB_KEY
   if (!ttbKey) return { books: [], totalCount: 0, mergedCount: 0, page, pageSize: PAGE_SIZE }
+
+  let result = await fetchAladinSearch(query, page, ttbKey)
+
+  // 알라딘 검색은 띄어쓰기에 민감해서 "주와연"처럼 붙여 쓰면 0건이 나옴 —
+  // 첫 페이지에서 결과가 없으면 띄어쓰기 위치를 바꿔가며 재시도
+  if (result.books.length === 0 && page === 1) {
+    const retried = await retryWithSpacing(query, ttbKey)
+    if (retried) result = retried
+  }
+
+  cacheSet(cacheKey, result)
+  return result
+}
+
+async function fetchAladinSearch(query, page, ttbKey) {
   const { data } = await axios.get('http://www.aladin.co.kr/ttb/api/ItemSearch.aspx', {
     params: { ttbkey: ttbKey, Query: query, QueryType: 'Keyword', MaxResults: PAGE_SIZE, start: page, SearchTarget: 'Book', output: 'js', Version: '20131101' },
     timeout: 8000,
@@ -73,9 +88,29 @@ async function searchBooksAladin(query, page = 1) {
     coverUrl:      item.cover || '',
     description:   item.description || '',
   }))
-  const result = { books, totalCount: data.totalResults || books.length, mergedCount: 0, page, pageSize: PAGE_SIZE }
-  cacheSet(cacheKey, result)
-  return result
+  return { books, totalCount: data.totalResults || books.length, mergedCount: 0, page, pageSize: PAGE_SIZE }
+}
+
+async function retryWithSpacing(query, ttbKey) {
+  const normalized = query.replace(/\s+/g, '')
+  if (normalized.length < 2 || normalized.length > 15) return null
+
+  const candidates = []
+  for (let i = 1; i < normalized.length; i++) {
+    candidates.push(normalized.slice(0, i) + ' ' + normalized.slice(i))
+  }
+
+  const results = await Promise.all(
+    candidates.map(q => fetchAladinSearch(q, 1, ttbKey).catch(() => null))
+  )
+
+  const exactMatch = results.find(r =>
+    r?.books.some(b => b.title.replace(/\s+/g, '') === normalized)
+  )
+  if (exactMatch) {
+    return { ...exactMatch, books: exactMatch.books.filter(b => b.title.replace(/\s+/g, '') === normalized) }
+  }
+  return results.find(r => r?.books.length > 0) || null
 }
 
 export async function getBookByISBN(isbn) {
@@ -139,7 +174,7 @@ async function getBookByISBNAladin(isbn) {
   if (!item) return null
   const price = item.priceSales || item.priceStandard || 0
   const originalPrice = item.priceStandard || 0
-  return {
+  const result = {
     isbn,
     title:       item.title || '',
     author:      item.author || '',
