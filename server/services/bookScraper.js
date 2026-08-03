@@ -76,9 +76,9 @@ async function fetchAladinSearch(query, page, ttbKey) {
   })
   const books = (data.item || []).map(item => ({
     isbn:          item.isbn13 || item.isbn || '',
-    title:         item.title || '',
-    author:        item.author || '',
-    publisher:     item.publisher || '',
+    title:         stripHtml(item.title),
+    author:        stripHtml(item.author),
+    publisher:     stripHtml(item.publisher),
     publishedAt:   (item.pubDate || '').slice(0, 7),
     platform:      'aladin',
     platformLabel: '알라딘',
@@ -86,7 +86,7 @@ async function fetchAladinSearch(query, page, ttbKey) {
     originalPrice: item.priceStandard || 0,
     discountRate:  null,
     coverUrl:      item.cover || '',
-    description:   item.description || '',
+    description:   stripHtml(item.description),
   }))
   return { books, totalCount: data.totalResults || books.length, mergedCount: 0, page, pageSize: PAGE_SIZE }
 }
@@ -176,12 +176,12 @@ async function getBookByISBNAladin(isbn) {
   const originalPrice = item.priceStandard || 0
   const result = {
     isbn,
-    title:       item.title || '',
-    author:      item.author || '',
-    publisher:   item.publisher || '',
+    title:       stripHtml(item.title),
+    author:      stripHtml(item.author),
+    publisher:   stripHtml(item.publisher),
     publishedAt: (item.pubDate || '').slice(0, 7),
     coverUrl:    (item.cover || '').replace('coversum', 'cover500'),
-    description: item.description || '',
+    description: stripHtml(item.description),
     lowestPrice: price,
     libraryCount: 0,
     subscriptions: [],
@@ -221,7 +221,15 @@ function mapNaverItem(item) {
 }
 
 function stripHtml(str) {
-  return (str || '').replace(/<[^>]+>/g, '').trim()
+  return (str || '')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .trim()
 }
 
 function formatPubdate(pubdate) {
