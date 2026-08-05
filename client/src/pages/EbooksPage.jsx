@@ -470,12 +470,6 @@ export default function EbooksPage() {
           <Link to="/" className="flex-shrink-0 select-none font-extrabold text-lg tracking-tight text-slate-900">
             온서재
           </Link>
-          <Link to="/" className="flex items-center gap-1 text-sm text-slate-400 hover:text-slate-700 transition-colors">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            홈으로
-          </Link>
           <div className="flex-1" />
           <div className="flex-shrink-0 flex items-center gap-1.5 text-xs font-semibold text-brand-600 bg-brand-50 hover:bg-brand-100 transition-all px-3 py-1.5 rounded-full whitespace-nowrap">
             <svg className="w-3.5 h-3.5 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
