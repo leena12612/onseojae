@@ -8,8 +8,9 @@ import { REGIONS } from '../constants/regions'
 
 const PAGE_SIZE = 20
 
-const cleanTitle = (title) =>
-  title.replace(/\s*[\(\[][^\)\]]*오디오[^\)\]]*[\)\]]/gi, '').trim()
+// "오디세이아 (영화 <오디세이> 원작)"처럼 괄호 안에 특수문자가 섞인 부가 설명이 붙으면
+// 검색어로 썼을 때 알라딘 검색이 0건을 반환하는 경우가 있어, 검색용 제목은 괄호 앞부분만 쓴다.
+const cleanTitle = (title) => title.replace(/\s*[\(\[].*$/, '').trim() || title.trim()
 
 // ── 공공도서관 탭 ────────────────────────────────────────────────────────────
 

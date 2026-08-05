@@ -6,7 +6,7 @@ export function cleanAuthor(author) {
   if (!author) return ''
   return author
     .split(/[/,^]/)[0]
-    .replace(/\s*(지음|옮김|엮음|그림|저)\s*$/, '')
+    .replace(/\s*외?\s*(지음|옮김|엮음|그림|저)\s*$/, '')
     .trim()
 }
 
@@ -17,7 +17,7 @@ function extractNames(author) {
   if (!author) return []
   return author
     .split(/[/,^]/)
-    .map((part) => part.replace(/\s*(지음|옮김|엮음|그림|저)\s*$/, '').trim())
+    .map((part) => part.replace(/\s*외?\s*(지음|옮김|엮음|그림|저)\s*$/, '').trim())
     .filter(Boolean)
 }
 
