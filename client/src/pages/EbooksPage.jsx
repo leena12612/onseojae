@@ -451,9 +451,16 @@ const TABS = [
 ]
 
 export default function EbooksPage() {
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [tab, setTab] = useState(searchParams.get('tab') || 'bookstore')
   const [regions, setRegions] = useRegionPreference()
+
+  // 탭을 바꾸면 URL에도 반영해서, 책 상세로 들어갔다가 뒤로가기 했을 때
+  // 처음 탭(서점 베스트)이 아니라 보고 있던 탭 그대로 돌아오게 한다.
+  const handleTabChange = (id) => {
+    setTab(id)
+    setSearchParams({ tab: id }, { replace: true })
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -495,7 +502,7 @@ export default function EbooksPage() {
         {/* 탭 */}
         <div className="flex gap-1.5 mb-6 border-b border-slate-100 pb-0">
           {TABS.map(t => (
-            <button key={t.id} onClick={() => setTab(t.id)}
+            <button key={t.id} onClick={() => handleTabChange(t.id)}
               className={`px-4 py-2.5 text-sm font-semibold transition-all border-b-2 -mb-px ${
                 tab === t.id
                   ? 'text-slate-900 border-slate-900'
